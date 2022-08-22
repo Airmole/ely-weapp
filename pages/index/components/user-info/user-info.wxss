@@ -1,0 +1,32 @@
+/* components/user-info.wxss */
+
+.top-bg {
+  height: 520rpx;
+  background-position: 60% 50%;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+}
+
+.nickname {
+  vertical-align: text-top;
+}
+
+.live-gif {
+  height: 20rpx;
+  width: 20rpx;
+}
+
+.viper {
+  height: 36rpx;
+  vertical-align: middle;
+}
+
+.bottom-water {
+  margin-top: -80rpx;
+  margin-bottom: -12rpx;
+}
+
+.gif-wave {
+  width: 100%;
+  mix-blend-mode: screen;
+}

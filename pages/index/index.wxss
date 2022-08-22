@@ -3,29 +3,6 @@ page {
   background-color: #eee;
   padding-bottom: 80rpx;
 }
-.nickname {
-  vertical-align:text-top;
-}
-
-.live-gif {
-  height: 20rpx;
-  width: 20rpx;
-}
-
-.viper {
-  height: 36rpx;
-  vertical-align: middle;
-}
-
-.bottom-water {
-  margin-top: -80rpx;
-  margin-bottom: -12rpx;
-}
-
-.gif-wave {
-  width: 100%;
-  mix-blend-mode: screen;
-}
 
 .guard-item {
   width: 170rpx;

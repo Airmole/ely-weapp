@@ -1,0 +1,5 @@
+/* pages/index/components/dynamic-card/dynamic-card.wxss */
+.live-gif {
+  height: 20rpx;
+  width: 20rpx;
+}

@@ -1,0 +1,68 @@
+<!--components/user-info.wxml-->
+<!-- up主信息区 -->
+<view class="bg-image padding-top-xl flex align-end top-bg" style="background-image: url('{{uperInfo.top_photo}}')">
+  <view class="bg-shadeBottom padding-top-xl flex-sub">
+    <!-- 头像、昵称。签名 -->
+    <view class="flex">
+      <view class="basis-xs">
+        <!-- 头像 -->
+        <view class="cu-avatar xl round margin-left" style="background-image:url({{uperInfo.face}});">
+          <view wx:if="{{uperInfo.official.type == 0}}" style="top: 100rpx;background-color: transparent;" class="cu-tag badge">
+            <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
+          </view>
+        </view>
+      </view>
+      <view class="padding">
+        <!-- 徽标 -->
+        <view class="text-lg text-bold nickname">{{uperInfo.name}} <text class="round cuIcon-{{uperInfo.sex=='女'?'female':'male'}} text-sm bg-{{uperInfo.sex=='女'?'pink':'blue'}}"></text><text class="cu-tag radius sm bg-orange margin-left-xs">Lv{{uperInfo.level}}</text>
+          <image wx:if="{{uperInfo.vip.type > 0 && uperInfo.vip.status > 0}}" class="viper margin-left-xs" mode="heightFix" src="{{uperInfo.vip.label.img_label_uri_hans}}"></image>
+          <image wx:if="{{uperInfo.nameplate}}" class="viper margin-left-xs" mode="heightFix" src="{{uperInfo.nameplate.image_small}}"></image>
+          <view wx:if="{{uperInfo.live_room.roomStatus==1&&uperInfo.live_room.liveStatus==1}}" class="margin-left-xs cu-tag radius sm bg-pink">
+            <image class="live-gif" src="https://s1.hdslb.com/bfs/static/jinkela/space/assets/live.gif"></image> 直播中
+          </view>
+        </view>
+        <!-- 签名 -->
+        <view>{{uperInfo.sign}}</view>
+      </view>
+    </view>
+    <!-- 认证信息 -->
+    <view class="cu-bar" wx:if="{{uperInfo.official.type >= 0}}">
+      <view class="action">
+        <view wx:if="{{uperInfo.official.type == 0}}" class="margin-lr-xs padding-top-xs">
+          <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
+        </view>
+        <block wx:if="{{uperInfo.official.role == 1 || uperInfo.official.role ==2 || uperInfo.official.role ==7 || uperInfo.official.role ==9}}">个人认证</block>
+        <block wx:else="">机构认证</block>
+        <text>：{{ uperInfo.official.title }}</text>
+      </view>
+    </view>
+    <!-- 底部流水 -->
+    <view class="bottom-water">
+      <image src="https://upload-images.jianshu.io/upload_images/4697920-0b3859b5e4ef17ec.gif" mode="widthFix" class="gif-wave"></image>
+    </view>
+  </view>
+</view>
+<!-- 粉丝、关注、获赞数据 -->
+<view class="padding flex text-center text-grey bg-white">
+  <!-- 粉丝 -->
+  <view class="flex flex-sub flex-direction solid-right text-orange">
+    <view class="text-xxl">{{uperCardInfo.card.fans}}</view>
+    <view>
+      <text class="cuIcon-peoplefill"></text> 粉丝
+    </view>
+  </view>
+  <!-- 关注 -->
+  <view class="flex flex-sub flex-direction solid-right text-blue">
+    <view class="text-xxl">{{uperCardInfo.card.attention}}</view>
+    <view>
+      <text class="cuIcon-attentionfill"></text> 关注
+    </view>
+  </view>
+  <!-- 获赞 -->
+  <view class="flex flex-sub flex-direction text-pink">
+    <view class="text-xxl">{{uperCardInfo.like_num}}</view>
+    <view>
+      <text class="cuIcon-appreciatefill"></text> 获赞
+    </view>
+  </view>
+</view>

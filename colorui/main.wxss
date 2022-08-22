@@ -3309,6 +3309,10 @@ scroll-view.cu-steps .cu-item {
 	padding-left: 50rpx;
 }
 
+.padding-left-xxl {
+	padding-left: 60rpx;
+}
+
 .padding-lr-xs {
 	padding-left: 10rpx;
 	padding-right: 10rpx;
