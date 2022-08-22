@@ -1,0 +1,202 @@
+<!--index.wxml-->
+<view class="padding-bottom-xl">
+  <!-- up主信息区 -->
+  <view class="bg-image padding-top-xl flex align-end" style="background-image: url('{{bgImage}}');height: 520rpx;">
+    <view class="bg-shadeBottom padding-top-xl flex-sub">
+      <!-- 头像、昵称。签名 -->
+      <view class="flex">
+        <view class="basis-xs">
+          <!-- 头像 -->
+          <view class="cu-avatar xl round margin-left" style="background-image:url({{uperInfo.face}});">
+            <view wx:if="{{uperInfo.official.type == 0}}" style="top: 100rpx;background-color: transparent;" class="cu-tag badge">
+              <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
+            </view>
+          </view>
+        </view>
+        <view class="padding">
+          <!-- 徽标 -->
+          <view class="text-lg text-bold nickname">{{uperInfo.name}} <text class="round cuIcon-{{uperInfo.sex=='女'?'female':'male'}} text-sm bg-{{uperInfo.sex=='女'?'pink':'blue'}}"></text><text class="cu-tag radius sm bg-orange margin-left-xs">Lv{{uperInfo.level}}</text>
+            <image wx:if="{{uperInfo.vip.type > 0 && uperInfo.vip.status > 0}}" class="viper margin-left-xs" mode="heightFix" src="{{uperInfo.vip.label.img_label_uri_hans}}"></image>
+            <image wx:if="{{uperInfo.nameplate}}" class="viper" mode="heightFix" src="{{uperInfo.nameplate.image_small}}"></image>
+            <view wx:if="{{uperInfo.live_room.roomStatus==1&&uperInfo.live_room.liveStatus==1}}" class="margin-left-xs cu-tag radius sm bg-pink">
+              <image class="live-gif" src="https://s1.hdslb.com/bfs/static/jinkela/space/assets/live.gif"></image> 直播中
+            </view>
+          </view>
+          <!-- 签名 -->
+          <view>{{uperInfo.sign}}</view>
+        </view>
+      </view>
+      <!-- 认证信息 -->
+      <view class="cu-bar" wx:if="{{uperInfo.official.type >= 0}}">
+        <view class="action">
+          <view wx:if="{{uperInfo.official.type == 0}}" class="margin-lr-xs padding-top-xs">
+            <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
+          </view>
+          <block wx:if="{{uperInfo.official.role == 1 || uperInfo.official.role ==2 || uperInfo.official.role ==7 || uperInfo.official.role ==9}}">个人认证</block>
+          <block wx:else="">机构认证</block>
+          <text>：{{ uperInfo.official.title }}</text>
+        </view>
+      </view>
+      <!-- 底部流水 -->
+      <view class="bottom-water">
+        <image src="https://upload-images.jianshu.io/upload_images/4697920-0b3859b5e4ef17ec.gif" mode="widthFix" class="gif-wave"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 粉丝、关注、获赞数据 -->
+  <view class="padding flex text-center text-grey bg-white shadow-warp">
+    <!-- 粉丝 -->
+    <view class="flex flex-sub flex-direction solid-right text-orange">
+      <view class="text-xxl">{{uperCardInfo.card.fans}}</view>
+      <view>
+        <text class="cuIcon-peoplefill"></text> 粉丝
+      </view>
+    </view>
+    <!-- 关注 -->
+    <view class="flex flex-sub flex-direction solid-right text-blue">
+      <view class="text-xxl">{{uperCardInfo.card.attention}}</view>
+      <view>
+        <text class="cuIcon-attentionfill"></text> 关注
+      </view>
+    </view>
+    <!-- 获赞 -->
+    <view class="flex flex-sub flex-direction text-pink">
+      <view class="text-xxl">{{uperCardInfo.like_num}}</view>
+      <view>
+        <text class="cuIcon-appreciatefill"></text> 获赞
+      </view>
+    </view>
+  </view>
+  <!-- 充电 -->
+  <view class="cu-bar bg-white solid-bottom margin-tb-sm radius margin-lr-sm shadow-warp">
+    <view class="action">
+      <text class="margin-lr-xs">🔋</text> <text class="text-bold">充电</text>
+      <view class="cu-avatar-group">
+        <view class="cu-avatar round sm" wx:for="{{charge.list}}" style="background-image:url({{item.avatar}});margin-left: -20rpx;" wx:key="index"></view>
+      </view>
+      <text>本月{{charge.count}}人</text>
+    </view>
+    <view class='action'>
+      共{{charge.total}}人充过电
+    </view>
+  </view>
+  <!-- 大航海 -->
+  <view class="margin-lr-sm shadow-warp" wx:if="{{topGuard}}">
+    <view class="cu-bar bg-white solid-bottom margin-top-xs radius-top">
+      <view class="action text-purple text-bold">
+        <text class="margin-lr-xs">🚢</text>大航海({{topGuard.info.num}})
+      </view>
+      <view class='action'>
+        查看所有 <text class="cuIcon-right"></text>
+      </view>
+    </view>
+    <view class="padding-top-sm padding-bottom-lg padding-bottom padding-lr-xs bg-white radius-bottom">
+      <!-- 大航海前三名 -->
+      <view class="flex flex-wrap justify-between text-center" wx:if="{{topGuard.top3}}">
+        <view class="flex-sub" wx:for="{{topGuard.top3}}" wx:key="index">
+          <view class="cu-avatar xl round margin-lr" style="background-image:url({{item.face}});">
+            <view style="margin-right: {{item.rank == 1 ? '50':'60'}}rpx;" class="cu-tag badge bg-{{item.rank == 1 ? 'yellow':'purple'}}">
+              <block wx:if="{{item.rank != 1}}">{{item.rank}}</block>
+              <block wx:else=""><text class="cuIcon-crownfill"></text></block>
+            </view>
+          </view>
+          <view class="text-center margin-top-xs padding-right-sm">{{ item.username }}</view>
+          <view class="text-center padding-right-xs">
+            <view class="cu-capsule radius">
+              <view style="background:linear-gradient(to right,\#{{item.medal_info.start_color}}, \#{{item.medal_info.end_color}});border-color: {{item.medal_info.border_color}};" class="cu-tag sm text-white">
+                {{ item.medal_info.medal_name }}
+              </view>
+              <view class="cu-tag line-black sm">{{item.medal_info.medal_level}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- 大航海三名以后 -->
+      <view class="flex flex-wrap text-center justify-between">
+        <view wx:for="{{topGuard.list}}" wx:if="{{index < 6}}" class="guard-item" wx:key="index">
+          <view class="cu-avatar round lg margin-top margin-lr-xs" style="background-image:url({{item.face}});">
+          </view>
+          <view class="text-cut">{{item.username}}</view>
+          <view class="text-center padding-right-xs">
+            <view class="cu-capsule radius">
+              <view style="background:linear-gradient(to right,\#{{item.medal_info.start_color}}, \#{{item.medal_info.end_color}});border-color: {{item.medal_info.border_color}};" class="cu-tag sm text-white">
+                {{ item.medal_info.medal_name }}
+              </view>
+              <view class="cu-tag line-black sm">{{item.medal_info.medal_level}}</view>
+            </view>
+          </view>
+        </view>
+        <!-- 更多，缩略舰长头像组 -->
+        <view wx:if="{{topGuard.list.length > 6}}" class="cu-avatar-group margin-top-lg" style="width: 340rpx;">
+          <view class="cu-avatar round lg" wx:for="{{topGuard.list}}" wx:if="{{index >= 6}}" style="background-image:url({{item.face}});" wx:key="index"></view>
+          <view class="margin-top-xs">查看更多<text class="cuIcon-more"></text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 视频投稿 -->
+  <view class="margin-tb margin-lr-sm shadow-warp">
+    <view class="cu-bar bg-white solid-bottom radius-top">
+      <view class="action text-bold" style="color: #00A1D6;">
+        <text class="margin-lr-xs">🎬</text>视频投稿({{videos.page.count}})
+      </view>
+      <view class='action'>
+        查看更多<text class="cuIcon-right"></text>
+      </view>
+    </view>
+    <view class="padding-tb-xs padding-xs bg-white radius-bottom">
+      <view class="flex flex-wrap">
+        <view wx:for="{{videos.list.vlist}}" wx:if="{{index<6}}" class="flex-sub video-item margin-top-sm" wx:key="index">
+          <view class="bg-img radius flex video-bg justify-between" style="background-image: url({{item.pic}});">
+            <view class="bg-shadeBottom radius-bottom-left padding-left-sm padding-top-xl flex-sub">
+              <text class="cuIcon-videofill"></text>{{item.play}}
+              <text class="cuIcon-newsfill"></text>{{item.video_review}}
+            </view>
+            <view class="bg-shadeBottom radius-bottom-right padding-top-xl padding-right-sm">{{item.length}}</view>
+          </view>
+          <view class="video-title"><text>{{item.title}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 用户合集列表 -->
+  <view class="margin-tb margin-lr-sm shadow-warp" wx:for="{{series.items_lists.series_list}}" wx:key="index">
+    <view class="cu-bar bg-white solid-bottom radius-top">
+      <view class="action text-bold">
+        <text class="margin-lr-xs cuIcon-title text-pink"></text>{{item.meta.name}}({{item.meta.total}})
+      </view>
+      <view class='action' wx:if="{{item.meta.total>6}}">
+        查看更多<text class="cuIcon-right"></text>
+      </view>
+    </view>
+    <view class="padding-tb-xs padding-xs bg-white radius-bottom">
+      <view class="flex flex-wrap">
+        <view wx:for="{{item.archives}}" wx:for-index="key" wx:for-item="value" wx:if="{{key<6}}" class="flex-sub video-item margin-top-sm" wx:key="key">
+          <view class="bg-img radius flex video-bg justify-between" style="background-image: url({{value.pic}});">
+            <view class="bg-shadeBottom radius-bottom-left padding-left-sm padding-top-xl flex-sub">
+              <text class="cuIcon-videofill"></text>{{value.stat.view}}
+              <text class="cuIcon-timefill"></text>{{value.create_at}}
+            </view>
+            <view class="bg-shadeBottom radius-bottom-right padding-top-xl padding-right-sm">{{value.time_length}}</view>
+          </view>
+          <view class="video-title"><text>{{value.title}}</text></view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 底导航栏 -->
+<view class="cu-bar tabbar bg-white shadow foot">
+  <view class="action" bindtap="NavChange" data-cur="index">
+    <view class='cuIcon-cu-image'>
+      <text class="cuIcon-homefill {{PageCur=='index'?'text-pink':'text-gray'}}"></text>
+    </view>
+    <view class="{{PageCur=='index'?'text-pink':'text-gray'}}">首页</view>
+  </view>
+  <view class="action" bindtap="NavChange" data-cur="dynamic">
+    <view class='cuIcon-cu-image'>
+      <text class="cuIcon-peoplefill {{PageCur=='dynamic'?'text-pink':'text-gray'}}"></text>
+    </view>
+    <view class="{{PageCur=='dynamic'?'text-pink':'text-gray'}}">动态</view>
+  </view>
+</view>
