@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "user-info": "./components/user-info/user-info",
-    "dynamic-card": "./components/dynamic-card/dynamic-card"
+    "dynamic-card": "./components/dynamic-card/dynamic-card",
+    "video-content": "./components/video-content/video-content"
   }
 }

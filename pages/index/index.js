@@ -171,6 +171,22 @@ Page({
     }
     this.setData({ tabCur: tab })
   },
+  videoTidChanged(e) {
+    const tid = e.detail
+    const uid = app.globalData.uid
+    const videoContent = this.selectComponent('#video-content')
+    videoContent.setData({ videoTid: tid })
+    this.getUperVideoList(uid, 1, this.data.videos.page.ps, this.data.videoOrderby, tid)
+    this.setData({ videoTid: tid })
+  },
+  orderbyChanged(e) {
+    const orderby = e.detail
+    const uid = app.globalData.uid
+    const videoContent = this.selectComponent('#video-content')
+    videoContent.setData({ videoOrderby: orderby })
+    this.getUperVideoList(uid, 1, this.data.videos.page.ps, orderby, this.data.videoTid)
+    this.setData({ videoOrderby: orderby })
+  },
   onReachBottom() {
     const tabCur = this.data.tabCur
     const uid = app.globalData.uid
@@ -178,7 +194,11 @@ Page({
       this.getSpaceDynamicList(uid, this.data.dynamic.offset)
     }
     if (tabCur == 'video') {
-      this.getUperVideoList(uid, this.data.videos.page.pn, this.data.videos.page.ps, this.data.videoOrderby, this.data.videoTid, this.data.videoKeyword)
+      var page = parseInt(this.data.videos.page.pn) + 1
+      if (this.data.videos.page.count <= (this.data.videos.page.pn * this.data.videos.page.ps)) {
+        return
+      }
+      this.getUperVideoList(uid, page, this.data.videos.page.ps, this.data.videoOrderby, this.data.videoTid, this.data.videoKeyword)
     }
   }
 })

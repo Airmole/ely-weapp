@@ -141,6 +141,15 @@
     </block>
   </block>
 
+  <block wx:if="{{tabCur == 'video'}}">
+    <video-content
+      id="video-content"
+      videos="{{videos}}"
+      bind:tidChanged="videoTidChanged"
+      bind:orderbyChanged="orderbyChanged"
+    ></video-content>
+  </block>
+
 </view>
 <!-- 底导航栏 -->
 <view wx:if="{{false}}" class="cu-bar tabbar bg-white shadow foot">

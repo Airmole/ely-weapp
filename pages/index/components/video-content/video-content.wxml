@@ -1,0 +1,92 @@
+<!--pages/index/components/video-content/video-content.wxml-->
+<view class="margin-tb margin-lr-sm shadow-warp">
+  <view class="cu-bar bg-white solid-bottom radius-top">
+    <view class="action text-bold" style="color: #00A1D6;">
+      <text class="margin-lr-xs">🎬</text>Ta的视频
+    </view>
+    <view class='action'>
+      <button size="mini" class="cu-btn bg-white" bindtap="showModal" data-target="settingModal">
+        <text class="cuIcon-more"></text>
+      </button>
+    </view>
+  </view>
+  <!-- more 设置 -->
+  <view class="cu-modal {{modalName=='settingModal'?'show':''}}" bindtap="hideModal">
+    <view class="cu-dialog" catchtap="catchtap">
+      <radio-group class="block" bindchange="orderbyChange">
+        <view class="cu-list menu text-left">
+          <view class="cu-item" wx:for="{{videoOrderbyOptions}}" wx:key="index">
+            <label class="flex justify-between align-center flex-sub">
+              <view class="flex-sub">{{item.label}}</view>
+              <radio class="round" value="{{item.value}}" checked="{{videoOrderby == item.value}}"></radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+      <radio-group class="block" bindchange="styleChange">
+        <view class="cu-list menu text-left solid-top">
+          <view class="cu-item">
+            <view class="content">
+              <text>展示样式</text>
+            </view>
+            <view class="action grid col-2 text-center">
+              <view class="text-sm padding-lr-sm" wx:for="{{videoListStyleOptions}}" wx:key="index">
+                <radio value="{{item.value}}" checked="{{item.value == videoListStyle}}"></radio>{{item.label}}
+              </view>
+            </view>
+          </view>
+        </view>
+      </radio-group>
+    </view>
+  </view>
+  <scroll-view scroll-x class="bg-white nav">
+    <view class="flex text-center">
+      <view bindtap="tidChanged" class="cu-item flex-sub {{0==videoTid?'text-pink cur':''}}" data-tid="{{0}}">
+        全部({{videos.page.count}})
+      </view>
+      <block wx:for="{{videos.list.tlist}}" wx:key="index">
+        <view bindtap="tidChanged" class="cu-item flex-sub {{item.tid==videoTid?'text-pink cur':''}}" data-tid="{{item.tid}}">
+          {{item.name}}({{item.count}})
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+  <!-- 卡片样式 -->
+  <view wx:if="{{videoListStyle == 'card'}}" class="padding-tb-xs padding-xs bg-white radius-bottom">
+    <view class="flex flex-wrap">
+      <view wx:for="{{videos.list.vlist}}" class="flex-sub video-item margin-top-sm" wx:key="index">
+        <view class="bg-img radius flex video-bg justify-between" style="background-image: url({{item.pic}});">
+          <view class="bg-shadeBottom radius-bottom-left padding-left-sm padding-top-xl flex-sub">
+            <text class="cuIcon-videofill"></text>{{item.play}}
+            <text class="cuIcon-newsfill"></text>{{item.video_review}}
+          </view>
+          <view class="bg-shadeBottom radius-bottom-right padding-top-xl padding-right-sm">{{item.length}}</view>
+        </view>
+        <view class="video-title"><text>{{item.title}}</text></view>
+      </view>
+    </view>
+  </view>
+  <!-- 列表样式 -->
+  <view class="cu-card article" wx:if="{{videoListStyle == 'list'}}">
+    <view class="cu-item bg-white border-bottom" style="margin: 0;border-radius: 0;" wx:for="{{videos.list.vlist}}" wx:key="index">
+      <view class="title">
+        <view class="text-cut">{{item.title}}</view>
+      </view>
+      <view class="content">
+        <view class="bg-img margin-right-sm flex justify-end" style="background-image: url({{item.pic}});height: 6.4em;width: 240rpx;">
+          <view class="padding-top-xs padding-right-xs text-white">
+            <view class="cu-tag radius bg-pink">投稿视频</view>
+          </view>
+        </view>
+        <view class="desc">
+          <view class="text-content"><text>{{item.description}}</text></view>
+          <view class="flex">
+            <view class="margin-lr-sm"><text class="cuIcon-videofill"></text>{{item.play}}</view>
+            <view class="margin-lr-sm"><text class="cuIcon-newsfill"></text>{{item.comment}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>

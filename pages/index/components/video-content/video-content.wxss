@@ -1,0 +1,4 @@
+/* pages/index/components/video-content/video-content.wxss */
+.border-bottom {
+  border-bottom: 1px solid #eee;
+}
