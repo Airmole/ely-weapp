@@ -7,6 +7,9 @@ Page({
   data: {
     pageCur: 'index',
     tabCur: 'home',
+    videoOrderby: 'pubdate',
+    videoTid: 0,
+    videoKeyword: '',
     tabs: [
       { label: '主页', value: 'home', icon: 'homefill' },
       { label: '动态', value: 'dynamic', icon: 'favorfill' },
@@ -98,12 +101,20 @@ Page({
       }
     })
   },
-  getUperVideoList(uid, page = 1, pagesize = 25, orderby = 'pubdate') {
+  getUperVideoList(uid, page = 1, pagesize = 25, orderby = 'pubdate', tid = 0, keyword = '') {
     var _this = this
     wx.request({
-      url: `${app.globalData.apiDomain}/x/space/arc/search?pn=${page}&ps=${pagesize}&order=${orderby}&jsonp=jsonp&mid=${uid}`,
+      url: `${app.globalData.apiDomain}/x/space/arc/search?pn=${page}&ps=${pagesize}&order=${orderby}&jsonp=jsonp&mid=${uid}&tid=${tid}&keyword=${keyword}`,
       success(res) {
-        _this.setData({ videos: res.data.data })
+        if (page <= 1) {
+          _this.setData({ videos: res.data.data })
+        } else {
+          let videos = _this.data.videos
+          videos.list.vlist = videos.list.vlist.concat(res.data.data.list.vlist)
+          videos.list.tlist = res.data.data.list.tlist
+          videos.page = res.data.data.page
+          _this.setData({ videos: videos })
+        }
       }
     })
   },
@@ -160,12 +171,14 @@ Page({
     }
     this.setData({ tabCur: tab })
   },
-  onReachBottom () {
+  onReachBottom() {
     const tabCur = this.data.tabCur
     const uid = app.globalData.uid
-    console.log(tabCur, '滚了滚了')
     if (tabCur == 'dynamic') {
       this.getSpaceDynamicList(uid, this.data.dynamic.offset)
+    }
+    if (tabCur == 'video') {
+      this.getUperVideoList(uid, this.data.videos.page.pn, this.data.videos.page.ps, this.data.videoOrderby, this.data.videoTid, this.data.videoKeyword)
     }
   }
 })
