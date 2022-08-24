@@ -1,4 +1,5 @@
 // pages/index/components/video-content/video-content.js
+const app = getApp()
 Component({
   options: {
     styleIsolation: 'apply-shared'
@@ -20,13 +21,23 @@ Component({
       value: 'pubdate',
     }
   },
-
+  // 生命周期
+  lifetimes: {
+    attached: function () {
+      this.setData({
+        bilibliWeappId: app.globalData.bilibliWeappId,
+        bilibliWeappVideoPath: app.globalData.bilibliWeappVideoPath
+      })
+    }
+  },
   /**
    * 组件的初始数据
    */
   data: {
     modalName: null,
     videoListStyle: 'card',
+    bilibliWeappId: '',
+    bilibliWeappVideoPath: '',
     videoOrderbyOptions: [
       { label: '最新发布', value: 'pubdate' },
       { label: '最多播放', value: 'click' },
@@ -42,19 +53,19 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    tidChanged (e) {
+    tidChanged(e) {
       const tid = e.currentTarget.dataset.tid
       this.triggerEvent('tidChanged', tid)
     },
-    styleChange (e) {
+    styleChange(e) {
       const value = e.detail.value
       this.setData({ videoListStyle: value })
     },
-    orderbyChange (e) {
+    orderbyChange(e) {
       const orderby = e.detail.value
       this.triggerEvent('orderbyChanged', orderby)
     },
-    showModal (e) {
+    showModal(e) {
       this.setData({ modalName: e.currentTarget.dataset.target })
     },
     hideModal(e) {
@@ -62,6 +73,10 @@ Component({
         modalName: null
       })
     },
-    catchtap () {}
+    catchtap() { },
+    preview(e) {
+      const image = e.currentTarget.dataset.image
+      wx.previewImage({ urls: image })
+    },
   }
 })

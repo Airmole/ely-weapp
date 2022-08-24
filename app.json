@@ -1,7 +1,8 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/guard/index"
+    "pages/guard/index",
+    "pages/dynamic/detail"
   ],
   "window":{
     "navigationStyle":"custom",

@@ -1,0 +1,98 @@
+<!--pages/dynamic/detail.wxml-->
+<cu-custom bgColor="bg-pink" isCustom="{{true}}">
+  <view slot="content">{{title}}</view>
+</cu-custom>
+
+<!-- 动态详情 -->
+<view class="cu-card dynamic no-card padding">
+  <view class="cu-item shadow" style="border-radius: 15rpx;">
+    <view class="cu-list menu-avatar">
+      <view class="cu-item">
+        <view class="cu-avatar round lg" style="background-image:url({{dynamic.card.user.head_url}});">
+          <view wx:if="{{dynamic.desc.user_profile.card.official_verify.type == 0}}" style="top: 75%;background-color: transparent;" class="cu-tag badge">
+            <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
+          </view>
+        </view>
+        <view class="content flex-sub">
+          <view>{{dynamic.card.user.name}}</view>
+          <view class="text-gray text-sm flex justify-between">
+            {{dynamic.card.item.upload_time_str}} 发布
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="padding padding-top-xs">
+      <text>{{dynamic.card.item.description}}</text>
+    </view>
+    <view class="grid flex-sub padding-lr col-3 grid-square">
+      <view class="bg-img" style="background-image:url({{item.img_src}});" wx:for="{{dynamic.card.item.pictures}}" wx:key="index">
+      </view>
+    </view>
+    <view class="text-gray text-sm text-right padding">
+      <text class="cuIcon-forwardfill margin-lr-xs"> {{dynamic.desc.repost}}</text>
+      <text class="cuIcon-commentfill margin-lr-xs"> {{dynamic.desc.comment}}</text>
+      <text class="cuIcon-appreciatefill margin-lr-xs"> {{dynamic.desc.like}}</text>
+    </view>
+    <view class="cu-list menu-avatar comment solids-top">
+      <!-- 置顶留言 -->
+      <view class="cu-item" wx:for="{{comments.top_replies}}" wx:key="index">
+        <view class="cu-avatar round" style="background-image:url({{item.member.avatar}});">
+          <view wx:if="{{item.member.official_verify.type == 0}}" style="top: 75%;background-color: transparent;" class="cu-tag badge">
+            <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
+          </view>
+        </view>
+        <view class="content">
+          <view class="text-grey">{{item.member.uname}}
+            <view class="cu-tag bg-orange radius sm">Lv{{item.member.level_info.current_level}}</view>
+            <view wx:if="{{item.up_action.reply}}" class="cu-tag radius bg-pink sm">UP</view>
+          </view>
+          <view class="text-gray text-df">
+            <view class="cu-tag line-pink margin-right-xs">置顶</view><text>{{item.content.message}}</text>
+          </view>
+          <view wx:for="{{item.replies}}" wx:for-index="key" wx:for-item="value" class="bg-gray padding-sm radius margin-top-sm text-sm">
+            <view class="flex">
+              <view>{{value.member.uname}}：</view>
+              <view class="flex-sub"><text>{{value.content.message}}</text></view>
+            </view>
+          </view>
+          <!-- <view class="margin-top-sm flex justify-between">
+            <view class="text-gray text-df">2018年12月4日</view>
+            <view>
+              <text class="cuIcon-appreciatefill text-red"></text>
+              <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
+            </view>
+          </view> -->
+        </view>
+      </view>
+      <view class="cu-item" wx:for="{{comments.replies}}">
+        <view class="cu-avatar round" style="background-image:url({{item.member.avatar}});">
+          <view wx:if="{{item.member.official_verify.type == 0}}" style="top: 75%;background-color: transparent;" class="cu-tag badge">
+            <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
+          </view>
+        </view>
+        <view class="content">
+          <view class="text-grey">{{item.member.uname}}
+            <view class="cu-tag bg-orange radius sm">Lv{{item.member.level_info.current_level}}</view>
+            <view wx:if="{{item.mid==dynamic.card.user.uid}}" class="cu-tag radius bg-pink sm">UP</view>
+          </view>
+          <view class="text-gray text-content text-df">
+            <text>{{item.content.message}}</text>
+          </view>
+          <view wx:for="{{item.replies}}" wx:for-index="key" wx:for-item="value" class="bg-gray padding-sm radius margin-top-sm text-sm">
+            <view class="flex">
+              <view>{{value.member.uname}}：</view>
+              <view class="flex-sub"><text>{{value.content.message}}</text></view>
+            </view>
+          </view>
+          <!-- <view class="margin-top-sm flex justify-between">
+            <view class="text-gray text-df">2018年12月4日</view>
+            <view>
+              <text class="cuIcon-appreciate text-gray"></text>
+              <text class="cuIcon-messagefill text-gray margin-left-sm"></text>
+            </view>
+          </view> -->
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

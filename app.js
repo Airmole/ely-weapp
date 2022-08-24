@@ -6,7 +6,10 @@ App({
   globalData: {
     apiDomain: 'https://lib.airmole.cn/bilibili',
     liveApiDomain: 'https://lib.airmole.cn/bililive',
+    vcApiDomain: 'https://api.vc.bilibili.com',
     uid: '373782549',
+    bilibliWeappId: 'wx7564fd5313d24844',
+    bilibliWeappVideoPath: 'pages/video/video?bvid=',
   },
   initalColorBar() {
     wx.getSystemInfo({

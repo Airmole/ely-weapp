@@ -9,9 +9,9 @@
     "miniprogram": {
       "list": [
         {
-          "name": "大航海榜单",
-          "pathName": "pages/guard/index",
-          "query": "uid=373782549&roomid=22387371&nickname=伊利齁甜",
+          "name": "动态详情",
+          "pathName": "pages/dynamic/detail",
+          "query": "dynamic_id=689771266710700037",
           "launchMode": "default",
           "scene": null
         }

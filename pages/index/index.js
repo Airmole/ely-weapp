@@ -10,6 +10,8 @@ Page({
     videoOrderby: 'pubdate',
     videoTid: '0',
     videoKeyword: '',
+    bilibliWeappId: '',
+    bilibliWeappVideoPath: '',
     tabs: [
       { label: '主页', value: 'home', icon: 'homefill' },
       { label: '动态', value: 'dynamic', icon: 'favorfill' },
@@ -28,6 +30,10 @@ Page({
     console.log('主播的UID为：', app.globalData.uid)
     const uid = app.globalData.uid
     this.getHomePageData(uid)
+    this.setData({
+      bilibliWeappId: app.globalData.bilibliWeappId,
+      bilibliWeappVideoPath: app.globalData.bilibliWeappVideoPath
+    })
   },
   getHomePageData(uid) {
     this.getUperUserinfo(uid)
@@ -159,6 +165,13 @@ Page({
     medal_info.end_color = util.formatNumberColor(medal_info.medal_color_end)
     medal_info.border_color = util.formatNumberColor(medal_info.medal_color_border)
     return medal_info
+  },
+  preview(e) {
+    const image = e.currentTarget.dataset.image
+    wx.previewImage({ urls: image })
+  },
+  go2video() {
+    this.setData({ tabCur: 'video' })
   },
   tabSelect(e) {
     const tab = e.currentTarget.dataset.id

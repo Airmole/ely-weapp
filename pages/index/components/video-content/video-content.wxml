@@ -57,8 +57,8 @@
   <!-- 卡片样式 -->
   <view wx:if="{{videoListStyle == 'card'}}" class="padding-tb-xs padding-xs bg-white radius-bottom">
     <view class="flex flex-wrap">
-      <view wx:for="{{videos.list.vlist}}" class="flex-sub video-item margin-top-sm" wx:key="index">
-        <view class="bg-img radius flex video-bg justify-between" style="background-image: url({{item.pic}});">
+      <navigator target="miniProgram" path="{{bilibliWeappVideoPath}}{{item.bvid}}" app-id="{{bilibliWeappId}}" wx:for="{{videos.list.vlist}}" class="flex-sub video-item margin-top-sm" wx:key="index">
+        <view class="bg-img radius flex video-bg justify-between" style="background-image: url({{item.pic}});" bindlongpress="preview" data-image="{{[item.pic]}}">
           <view class="bg-shadeBottom radius-bottom-left padding-left-sm padding-top-xl flex-sub">
             <text class="cuIcon-videofill"></text>{{item.play}}
             <text class="cuIcon-newsfill"></text>{{item.video_review}}
@@ -66,17 +66,17 @@
           <view class="bg-shadeBottom radius-bottom-right padding-top-xl padding-right-sm">{{item.length}}</view>
         </view>
         <view class="video-title"><text>{{item.title}}</text></view>
-      </view>
+      </navigator>
     </view>
   </view>
   <!-- 列表样式 -->
   <view class="cu-card article" wx:if="{{videoListStyle == 'list'}}">
-    <view class="cu-item bg-white border-bottom" style="margin: 0;border-radius: 0;" wx:for="{{videos.list.vlist}}" wx:key="index">
+    <navigator target="miniProgram" path="{{bilibliWeappVideoPath}}{{item.bvid}}" app-id="{{bilibliWeappId}}" class="cu-item bg-white border-bottom" style="margin: 0;border-radius: 0;" wx:for="{{videos.list.vlist}}" wx:key="index">
       <view class="title">
         <view class="text-cut">{{item.title}}</view>
       </view>
       <view class="content">
-        <view class="bg-img margin-right-sm flex justify-end" style="background-image: url({{item.pic}});height: 6.4em;width: 240rpx;">
+        <view class="bg-img margin-right-sm flex justify-end" style="background-image: url({{item.pic}});height: 6.4em;width: 240rpx;" bindlongpress="preview" data-image="{{[item.pic]}}">
           <view class="padding-top-xs padding-right-xs text-white">
             <view class="cu-tag radius bg-pink">投稿视频</view>
           </view>
@@ -89,6 +89,6 @@
           </view>
         </view>
       </view>
-    </view>
+    </navigator>
   </view>
 </view>

@@ -23,25 +23,25 @@
     </view>
     <!-- 图文动态 -->
     <block wx:if="{{dynamic.type == 'DYNAMIC_TYPE_DRAW'}}">
-      <view class="text-content">
+      <navigator url="/pages/dynamic/detail?dynamic_id={{dynamic.id_str}}" class="text-content">
         <text>{{dynamic.modules.module_dynamic.desc.text}}</text>
-      </view>
+      </navigator>
       <view class="grid flex-sub padding-lr col-3 grid-square">
         <block wx:for="{{dynamic.modules.module_dynamic.major.draw.items}}" wx:key="index">
-          <view class="bg-img" style="background-image:url({{item.src}});">
+          <view class="bg-img" style="background-image:url({{item.src}});" bindtap="preview" data-image="{{[item.src]}}">
           </view>
         </block>
       </view>
     </block>
     <!-- 视频投稿动态 -->
     <block wx:if="{{dynamic.type == 'DYNAMIC_TYPE_AV'}}">
-      <view class="cu-card article">
+      <navigator target="miniProgram" path="{{bilibliWeappVideoPath}}{{dynamic.modules.module_dynamic.major.archive.bvid}}" app-id="{{bilibliWeappId}}" class="cu-card article">
         <view style="background-color: #eee;margin: 0rpx 10rpx;" class="cu-item">
           <view class="title">
             <view class="text-cut">{{dynamic.modules.module_dynamic.major.archive.title}}</view>
           </view>
           <view class="content">
-            <view class="bg-img margin-right-sm radius flex justify-end" style="background-image: url({{dynamic.modules.module_dynamic.major.archive.cover}});height: 6.4em;width: 240rpx;">
+            <view class="bg-img margin-right-sm radius flex justify-end" style="background-image: url({{dynamic.modules.module_dynamic.major.archive.cover}});height: 6.4em;width: 240rpx;" bindlongpress="preview" data-image="{{[dynamic.modules.module_dynamic.major.archive.cover]}}">
               <view class="padding-top-xs padding-right-xs text-white">
                 <view class="cu-tag radius bg-pink">投稿视频</view>
               </view>
@@ -55,27 +55,27 @@
             </view>
           </view>
         </view>
-      </view>
+      </navigator>
     </block>
     <!-- 音频投稿动态 -->
     <block wx:if="{{dynamic.type == 'DYNAMIC_TYPE_MUSIC'}}">
-      <view class="bg-img bg-mask radius padding-top-xl flex align-end margin-lr-sm" style="background-image: url({{dynamic.modules.module_dynamic.major.music.cover}});height: 300rpx;">
+      <view class="bg-img bg-mask radius padding-top-xl flex align-end margin-lr-sm" style="background-image: url({{dynamic.modules.module_dynamic.major.music.cover}});height: 300rpx;" bindlongpress="preview" data-image="{{[dynamic.modules.module_dynamic.major.music.cover]}}" bindtap="openInBrowser" data-url="{{dynamic.modules.module_dynamic.major.music.jump_url}}">
         <view class="padding-xl text-white" style="width: 720rpx;">
           <view class="padding-xs text-xl">
             {{dynamic.modules.module_dynamic.major.music.title}}
           </view>
           <view class="padding-xs text-cut">
-            {{dynamic.modules.module_dynamic.desc.text}}
+            {{dynamic.modules.module_dynamic.major.music.label}} | {{dynamic.modules.module_dynamic.desc.text}}
           </view>
         </view>
       </view>
     </block>
     <!-- 直播推荐动态 -->
     <block wx:if="{{dynamic.type == 'DYNAMIC_TYPE_LIVE_RCMD'}}">
-      <view class="cu-card article">
+      <view class="cu-card article" bindtap="openInBrowser" data-url="{{dynamic.modules.module_dynamic.major.live_rcmd.json.live_play_info.link}}">
         <view style="background-color: #eee;margin: 0rpx 10rpx;" class="cu-item">
           <view class="content margin-top-sm">
-            <view class="bg-img margin-right-sm radius flex justify-end" style="background-image: url({{dynamic.modules.module_dynamic.major.live_rcmd.json.live_play_info.cover}});height: 6.4em;width: 240rpx;">
+            <view class="bg-img margin-right-sm radius flex justify-end" style="background-image: url({{dynamic.modules.module_dynamic.major.live_rcmd.json.live_play_info.cover}});height: 6.4em;width: 240rpx;" bindlongpress="preview" data-image="{{[dynamic.modules.module_dynamic.major.live_rcmd.json.live_play_info.cover]}}">
               <view class="padding-top-xs padding-right-xs text-white">
                 <view class="cu-tag radius sm bg-pink">
                   <image class="live-gif" src="https://s1.hdslb.com/bfs/static/jinkela/space/assets/live.gif"></image> 直播中
@@ -92,6 +92,7 @@
         </view>
       </view>
     </block>
+    <!-- 卡片底部点赞评论数 -->
     <view class="text-gray text-sm text-right padding">
       <text wx:if="{{!dynamic.modules.module_stat.forward.hidden}}" class="cuIcon-forwardfill margin-lr-xs"> {{dynamic.modules.module_stat.forward.count}}</text>
       <text wx:if="{{!dynamic.modules.module_stat.comment.hidden}}" class="cuIcon-commentfill margin-lr-xs"> {{dynamic.modules.module_stat.comment.count}}</text>

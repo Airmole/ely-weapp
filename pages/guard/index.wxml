@@ -1,11 +1,15 @@
 <!--pages/guard/index.wxml-->
+<!-- 标题栏 -->
 <cu-custom bgColor="bg-purple" isCustom="{{true}}">
   <view slot="content">Ta的大航海</view>
 </cu-custom>
+
+<!-- 顶部背景图 -->
 <view class="bg-image image-header flex justify-center" style="background-image: url('{{bgHeader}}');">
   <view class="text-title text-xl nickname text-center text-cut">{{uperName}}({{guards.info.num}})</view>
 </view>
 
+<!-- 排行榜内容 -->
 <view class="bg-img" style="background-image: url({{fillImage}});" wx:for="{{guards.data}}" wx:key="index">
   <view class="padding-lr-xl padding-tb-xs text-black">
     <view class="padding-xs text-xl">
@@ -33,10 +37,12 @@
         </view>
       </view>
     </view>
-    <view wx:if="{{guards.info.num < 1}}">
-      <tips tipsText="暂时还没人上榜~"></tips>
-    </view>
   </view>
 </view>
+<!-- 空数据展示 -->
+<view class="bg-img padding-xl text-center" style="background-image: url({{fillImage}});" wx:if="{{guards.info.num <= 0}}">
+  <view class="text-xl">暂时还没有人哦~</view>
+</view>
 
+<!-- 尾图 -->
 <image class="image-footer" src="{{bgFooter}}" mode="widthFix" widthFix></image>
