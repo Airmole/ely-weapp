@@ -17,7 +17,7 @@
   <!-- 主页 -->
   <block wx:if="{{tabCur == 'home'}}">
     <!-- 充电 -->
-    <view class="cu-bar bg-white solid-bottom margin-tb-sm radius margin-lr-sm shadow-warp">
+    <view class="cu-bar bg-white solid-bottom margin-tb-sm radius margin-lr-sm">
       <view class="action">
         <text class="margin-lr-xs">🔋</text> <text class="text-bold">充电</text>
         <view class="cu-avatar-group">
@@ -30,7 +30,7 @@
       </view>
     </view>
     <!-- 大航海 -->
-    <view class="margin-lr-sm shadow-warp" wx:if="{{topGuard}}">
+    <navigator url="../guard/index?nickname={{uperInfo.name}}&roomid={{uperInfo.live_room.roomid}}&uid={{uperInfo.mid}}" class="margin-lr-sm shadow-warp" wx:if="{{topGuard}}">
       <view class="cu-bar bg-white solid-bottom margin-top-xs radius-top">
         <view class="action text-purple text-bold">
           <text class="margin-lr-xs">🚢</text>大航海({{topGuard.info.num}})
@@ -82,7 +82,7 @@
           </view>
         </view>
       </view>
-    </view>
+    </navigator>
     <!-- 视频投稿 -->
     <view class="margin-tb margin-lr-sm shadow-warp">
       <view class="cu-bar bg-white solid-bottom radius-top">

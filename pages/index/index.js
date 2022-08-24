@@ -8,7 +8,7 @@ Page({
     pageCur: 'index',
     tabCur: 'home',
     videoOrderby: 'pubdate',
-    videoTid: 0,
+    videoTid: '0',
     videoKeyword: '',
     tabs: [
       { label: '主页', value: 'home', icon: 'homefill' },

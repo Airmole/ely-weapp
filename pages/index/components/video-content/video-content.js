@@ -12,7 +12,7 @@ Component({
       value: {},
     },
     videoTid: {
-      type: [String, Number],
+      type: String,
       value: '0',
     },
     videoOrderby: {

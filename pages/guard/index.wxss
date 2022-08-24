@@ -1,0 +1,38 @@
+/* pages/guard/index.wxss */
+page {
+  background-color: #6847E7;
+  height: 100%;
+}
+
+.image-header {
+  width: 100%;
+  margin-bottom: -10rpx;
+  background-size: 100% auto;
+  height: 590rpx;
+  background-repeat: no-repeat;
+  padding-top: 520rpx;
+}
+
+.nickname {
+  width: 300rpx;
+}
+
+.image-footer {
+  width: 100%;
+}
+
+.guard-icon {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.icon-size {
+  width: 60rpx;
+  height: 80rpx;
+}
+
+.userinfo-avatar {
+  border-radius: 50rpx;
+  clip-path: circle(50% at center);
+  box-shadow: 5rpx 5rpx 15rpx #ccc;
+}

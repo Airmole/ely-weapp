@@ -4,5 +4,18 @@
   "setting": {
     "compileHotReLoad": false,
     "urlCheck": false
+  },
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "大航海榜单",
+          "pathName": "pages/guard/index",
+          "query": "uid=373782549&roomid=22387371&nickname=伊利齁甜",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
   }
 }
