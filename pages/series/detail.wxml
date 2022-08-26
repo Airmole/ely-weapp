@@ -1,0 +1,48 @@
+<!--pages/series/detail.wxml-->
+<!-- 标题栏 -->
+<cu-custom bgColor="bg-pink" isCustom="{{true}}">
+  <view slot="content">{{title}}</view>
+</cu-custom>
+
+<view class="margin-tb margin-lr-sm shadow-warp">
+  <view class="cu-bar bg-white solid-bottom radius-top">
+    <view class="action text-bold">
+      <text class="margin-lr-xs cuIcon-title text-pink"></text>{{seriesInfo.meta.name}}({{seriesInfo.meta.total}})
+    </view>
+    <view class='action'>
+      <button size="mini" class="cu-btn bg-white" bindtap="showModal" data-target="settingModal">
+        <text class="cuIcon-more"></text>
+      </button>
+    </view>
+  </view>
+
+  <!-- 更多操作设置模态框 -->
+  <view class="cu-modal {{modalName=='settingModal'?'show':''}}" bindtap="hideModal">
+    <view class="cu-dialog" catchtap="catchtap">
+      <radio-group class="block" bindchange="orderbyChange">
+        <view class="cu-list menu text-left">
+          <view class="cu-item" wx:for="{{videoOrderbyOptions}}" wx:key="index">
+            <label class="flex justify-between align-center flex-sub">
+              <view class="flex-sub">{{item.label}}</view>
+              <radio class="round" value="{{item.value}}" checked="{{videoOrderby == item.value}}"></radio>
+            </label>
+          </view>
+        </view>
+      </radio-group>
+    </view>
+  </view>
+  <view class="padding-tb-xs padding-xs bg-white radius-bottom">
+    <view class="flex flex-wrap">
+      <navigator target="miniProgram" path="{{bilibliWeappVideoPath}}{{value.bvid}}" app-id="{{bilibliWeappId}}" wx:for="{{series.archives}}" wx:for-index="key" wx:for-item="value" class="flex-sub video-item margin-top-sm" wx:key="key">
+        <view class="bg-img radius flex video-bg justify-between" style="background-image: url({{value.pic}});" bindlongpress="preview" data-image="{{[value.pic]}}">
+          <view class="bg-shadeBottom radius-bottom-left padding-left-sm padding-top-xl flex-sub">
+            <text class="cuIcon-videofill"></text>{{value.stat.view}}
+            <text class="cuIcon-timefill"></text>{{value.create_at}}
+          </view>
+          <view class="bg-shadeBottom radius-bottom-right padding-top-xl padding-right-sm">{{value.time_length}}</view>
+        </view>
+        <view class="video-title"><text>{{value.title}}</text></view>
+      </navigator>
+    </view>
+  </view>
+</view>

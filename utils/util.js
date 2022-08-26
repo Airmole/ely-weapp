@@ -1,4 +1,5 @@
 const formatTimestampToDate = timestamp => {
+  if (timestamp == '') return ''
   const date = new Date(parseInt(timestamp + '000'))
   const month = date.getMonth() + 1
   const day = date.getDate()

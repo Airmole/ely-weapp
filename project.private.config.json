@@ -5,17 +5,5 @@
     "compileHotReLoad": false,
     "urlCheck": false
   },
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "动态详情",
-          "pathName": "pages/dynamic/detail",
-          "query": "dynamic_id=689771266710700037",
-          "launchMode": "default",
-          "scene": null
-        }
-      ]
-    }
-  }
+  "condition": {}
 }

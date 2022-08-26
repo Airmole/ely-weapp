@@ -1,0 +1,26 @@
+<!--pages/index/components/series-list/series-list.wxml-->
+<!-- 用户合集列表 -->
+<view class="margin-tb margin-lr-sm shadow-warp" wx:for="{{series.items_lists.series_list}}" wx:key="index">
+  <view class="cu-bar bg-white solid-bottom radius-top">
+    <view class="action text-bold">
+      <text class="margin-lr-xs cuIcon-title text-pink"></text>{{item.meta.name}}({{item.meta.total}})
+    </view>
+    <navigator url="/pages/series/detail?sid={{item.meta.series_id}}" class='action' wx:if="{{item.meta.total>6}}">
+      查看更多<text class="cuIcon-right"></text>
+    </navigator>
+  </view>
+  <view class="padding-tb-xs padding-xs bg-white radius-bottom">
+    <view class="flex flex-wrap">
+      <navigator target="miniProgram" path="{{bilibliWeappVideoPath}}{{value.bvid}}" app-id="{{bilibliWeappId}}" wx:for="{{item.archives}}" wx:for-index="key" wx:for-item="value" wx:if="{{key<6}}" class="flex-sub video-item margin-top-sm" wx:key="key">
+        <view class="bg-img radius flex video-bg justify-between" style="background-image: url({{value.pic}});" bindlongpress="preview" data-image="{{[value.pic]}}">
+          <view class="bg-shadeBottom radius-bottom-left padding-left-sm padding-top-xl flex-sub">
+            <text class="cuIcon-videofill"></text>{{value.stat.view}}
+            <text class="cuIcon-timefill"></text>{{value.create_at}}
+          </view>
+          <view class="bg-shadeBottom radius-bottom-right padding-top-xl padding-right-sm">{{value.time_length}}</view>
+        </view>
+        <view class="video-title"><text>{{value.title}}</text></view>
+      </navigator>
+    </view>
+  </view>
+</view>

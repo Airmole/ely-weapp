@@ -3,6 +3,8 @@
   <view slot="content">{{title}}</view>
 </cu-custom>
 
+<!-- 仅适用于图文动态 -->
+
 <!-- 动态详情 -->
 <view class="cu-card dynamic no-card padding">
   <view class="cu-item shadow" style="border-radius: 15rpx;">
@@ -21,11 +23,11 @@
         </view>
       </view>
     </view>
-    <view class="padding padding-top-xs">
+    <view class="padding">
       <text>{{dynamic.card.item.description}}</text>
     </view>
     <view class="grid flex-sub padding-lr col-3 grid-square">
-      <view class="bg-img" style="background-image:url({{item.img_src}});" wx:for="{{dynamic.card.item.pictures}}" wx:key="index">
+      <view class="bg-img" style="background-image:url({{item.img_src}});" wx:for="{{dynamic.card.item.pictures}}" wx:key="index" bindtap="preview" data-image="{{[item.img_src]}}">
       </view>
     </view>
     <view class="text-gray text-sm text-right padding">
@@ -34,6 +36,14 @@
       <text class="cuIcon-appreciatefill margin-lr-xs"> {{dynamic.desc.like}}</text>
     </view>
     <view class="cu-list menu-avatar comment solids-top">
+      <!-- 留言排序规则 -->
+      <scroll-view scroll-x class="bg-white nav">
+        <view class="flex text-center">
+          <view class="cu-item flex-sub {{item.value==orderby?'text-pink cur':''}}" data-value="{{item.value}}" wx:for="{{oderbyOptions}}" bindtap="orderbyChange" wx:key="index">
+            {{ item.label }}
+          </view>
+        </view>
+      </scroll-view>
       <!-- 置顶留言 -->
       <view class="cu-item" wx:for="{{comments.top_replies}}" wx:key="index">
         <view class="cu-avatar round" style="background-image:url({{item.member.avatar}});">
@@ -43,13 +53,13 @@
         </view>
         <view class="content">
           <view class="text-grey">{{item.member.uname}}
-            <view class="cu-tag bg-orange radius sm">Lv{{item.member.level_info.current_level}}</view>
-            <view wx:if="{{item.up_action.reply}}" class="cu-tag radius bg-pink sm">UP</view>
+            <view class="cu-tag bg-orange radius sm"><text class="text-sm">LV{{item.member.level_info.current_level}}</text></view>
+            <view wx:if="{{item.up_action.reply}}" class="cu-tag radius bg-pink sm"><text class="text-sm">UP</text></view>
           </view>
           <view class="text-gray text-df">
             <view class="cu-tag line-pink margin-right-xs">置顶</view><text>{{item.content.message}}</text>
           </view>
-          <view wx:for="{{item.replies}}" wx:for-index="key" wx:for-item="value" class="bg-gray padding-sm radius margin-top-sm text-sm">
+          <view wx:for="{{item.replies}}" wx:for-index="key" wx:for-item="value" wx:key="key" class="bg-gray padding-sm radius margin-top-sm text-sm">
             <view class="flex">
               <view>{{value.member.uname}}：</view>
               <view class="flex-sub"><text>{{value.content.message}}</text></view>
@@ -64,7 +74,7 @@
           </view> -->
         </view>
       </view>
-      <view class="cu-item" wx:for="{{comments.replies}}">
+      <view class="cu-item" wx:for="{{comments.replies}}" wx:key="index">
         <view class="cu-avatar round" style="background-image:url({{item.member.avatar}});">
           <view wx:if="{{item.member.official_verify.type == 0}}" style="top: 75%;background-color: transparent;" class="cu-tag badge">
             <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
@@ -72,13 +82,13 @@
         </view>
         <view class="content">
           <view class="text-grey">{{item.member.uname}}
-            <view class="cu-tag bg-orange radius sm">Lv{{item.member.level_info.current_level}}</view>
-            <view wx:if="{{item.mid==dynamic.card.user.uid}}" class="cu-tag radius bg-pink sm">UP</view>
+            <view class="cu-tag bg-orange radius sm"><text class="text-sm">LV{{item.member.level_info.current_level}}</text></view>
+            <view wx:if="{{item.mid==dynamic.card.user.uid}}" class="cu-tag radius bg-pink sm"><text class="text-sm">UP</text></view>
           </view>
           <view class="text-gray text-content text-df">
             <text>{{item.content.message}}</text>
           </view>
-          <view wx:for="{{item.replies}}" wx:for-index="key" wx:for-item="value" class="bg-gray padding-sm radius margin-top-sm text-sm">
+          <view wx:for="{{item.replies}}" wx:for-index="key" wx:for-item="value" wx:key="key" class="bg-gray padding-sm radius margin-top-sm text-sm">
             <view class="flex">
               <view>{{value.member.uname}}：</view>
               <view class="flex-sub"><text>{{value.content.message}}</text></view>

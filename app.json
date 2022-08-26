@@ -2,7 +2,8 @@
   "pages":[
     "pages/index/index",
     "pages/guard/index",
-    "pages/dynamic/detail"
+    "pages/dynamic/detail",
+    "pages/series/detail"
   ],
   "window":{
     "navigationStyle":"custom",

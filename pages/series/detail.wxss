@@ -1,0 +1,23 @@
+/* pages/series/detail.wxss */
+.video-item {
+  height: 280rpx;
+  width: 320rpx;
+  margin: 10rpx 10rpx;
+}
+
+.video-item {
+  height: 280rpx;
+  width: 320rpx;
+  margin: 10rpx 10rpx;
+}
+
+.video-bg {
+  height: 200rpx;
+  padding-top: 100rpx;
+}
+
+.video-title {
+  width: 320rpx;
+  height: 80rpx;
+  overflow: hidden;
+}

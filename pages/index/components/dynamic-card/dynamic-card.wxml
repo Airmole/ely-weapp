@@ -23,7 +23,7 @@
     </view>
     <!-- 图文动态 -->
     <block wx:if="{{dynamic.type == 'DYNAMIC_TYPE_DRAW'}}">
-      <navigator url="/pages/dynamic/detail?dynamic_id={{dynamic.id_str}}" class="text-content">
+      <navigator class="text-content" url="/pages/dynamic/detail?dynamic_id={{dynamic.id_str}}">
         <text>{{dynamic.modules.module_dynamic.desc.text}}</text>
       </navigator>
       <view class="grid flex-sub padding-lr col-3 grid-square">

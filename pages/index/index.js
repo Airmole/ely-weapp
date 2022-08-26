@@ -15,7 +15,8 @@ Page({
     tabs: [
       { label: '主页', value: 'home', icon: 'homefill' },
       { label: '动态', value: 'dynamic', icon: 'favorfill' },
-      { label: '投稿', value: 'video', icon: 'videofill' }
+      { label: '投稿', value: 'video', icon: 'videofill' },
+      { label: '合集', value: 'series', icon: 'tagfill' }
     ],
     title: '欢迎使用',
     bgImage: 'http://i2.hdslb.com/bfs/space/bd4068984046ee454902da0c13b331dbe626ee82.jpg',
@@ -54,7 +55,6 @@ Page({
         })
         // console.log(res.data.data.live_room)
         if (res.data.data.live_room) {
-          // _this.getLiveroomInitData(res.data.data.live_room.roomid)
           _this.getLiveroomTopGuard(res.data.data.live_room.roomid, app.globalData.uid)
         }
       }

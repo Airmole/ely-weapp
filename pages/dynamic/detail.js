@@ -10,6 +10,10 @@ Page({
     dynamicId: '',
     title: '',
     orderby: '3',
+    oderbyOptions: [
+      { label: '按热度排序', value: '3' },
+      { label: '按时间排序', value: '2' }
+    ],
     dynamic: {},
     comments: {},
   },
@@ -43,9 +47,23 @@ Page({
     wx.request({
       url: `${app.globalData.apiDomain}/x/v2/reply/main?type=${type}&oid=${oid}&mode=${mode}&next=${next}&ps=${pagesize}`,
       success(res) {
-        _this.setData({ comments: res.data.data })
+        if (res.data.data.cursor.is_begin) {
+          _this.setData({ comments: res.data.data })
+        } else {
+          let comments = _this.data.comments
+          if (res.data.data.replies) {
+            comments.replies = comments.replies.concat(res.data.data.replies)
+          }
+          comments.cursor = res.data.data.cursor
+          _this.setData({ comments: comments })
+        }
       }
     })
+  },
+  orderbyChange (e) {
+    const orderby = e.currentTarget.dataset.value
+    this.setData({ orderby: orderby })
+    this.getDynamicComment(this.getCommentTypeNum(this.data.dynamic.desc.type), this.data.dynamic.desc.rid, orderby)
   },
   getCommentTypeNum(type) {
     switch (type) {
@@ -55,12 +73,18 @@ Page({
         return 11
     }
   },
+  
+  preview(e) {
+    const image = e.currentTarget.dataset.image
+    wx.previewImage({ urls: image })
+  },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom() {
-
+    if (this.data.comments.cursor.is_end) return
+    this.getDynamicComment(this.getCommentTypeNum(this.data.dynamic.desc.type), this.data.dynamic.desc.rid, this.data.orderby, this.data.comments.cursor.next)
   },
 
   /**

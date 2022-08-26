@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="padding-bottom-xl">
+<about-icon/>
   <!-- up主信息区 -->
   <user-info uper-info="{{uperInfo}}" uper-card-info="{{uperCardInfo}}"></user-info>
 
@@ -108,56 +109,23 @@
         </view>
       </view>
     </view>
-    <!-- 用户合集列表 -->
-    <view class="margin-tb margin-lr-sm shadow-warp" wx:for="{{series.items_lists.series_list}}" wx:key="index">
-      <view class="cu-bar bg-white solid-bottom radius-top">
-        <view class="action text-bold">
-          <text class="margin-lr-xs cuIcon-title text-pink"></text>{{item.meta.name}}({{item.meta.total}})
-        </view>
-        <view class='action' wx:if="{{item.meta.total>6}}">
-          查看更多<text class="cuIcon-right"></text>
-        </view>
-      </view>
-      <view class="padding-tb-xs padding-xs bg-white radius-bottom">
-        <view class="flex flex-wrap">
-          <navigator target="miniProgram" path="{{bilibliWeappVideoPath}}{{value.bvid}}" app-id="{{bilibliWeappId}}" wx:for="{{item.archives}}" wx:for-index="key" wx:for-item="value" wx:if="{{key<6}}" class="flex-sub video-item margin-top-sm" wx:key="key">
-            <view class="bg-img radius flex video-bg justify-between" style="background-image: url({{value.pic}});" bindlongpress="preview" data-image="{{[value.pic]}}">
-              <view class="bg-shadeBottom radius-bottom-left padding-left-sm padding-top-xl flex-sub">
-                <text class="cuIcon-videofill"></text>{{value.stat.view}}
-                <text class="cuIcon-timefill"></text>{{value.create_at}}
-              </view>
-              <view class="bg-shadeBottom radius-bottom-right padding-top-xl padding-right-sm">{{value.time_length}}</view>
-            </view>
-            <view class="video-title"><text>{{value.title}}</text></view>
-          </navigator>
-        </view>
-      </view>
-    </view>
   </block>
+
   <!-- 动态 -->
   <block wx:if="{{tabCur == 'dynamic'}}">
     <block wx:for="{{dynamic.items}}" wx:key="index">
       <dynamic-card dynamic="{{item}}"></dynamic-card>
     </block>
   </block>
+
   <!-- 投稿 -->
   <block wx:if="{{tabCur == 'video'}}">
     <video-content id="video-content" videos="{{videos}}" bind:tidChanged="videoTidChanged" bind:orderbyChanged="orderbyChanged"></video-content>
   </block>
 
-</view>
-<!-- 底导航栏 -->
-<view wx:if="{{false}}" class="cu-bar tabbar bg-white shadow foot">
-  <view class="action" bindtap="NavChange" data-cur="index">
-    <view class='cuIcon-cu-image'>
-      <text class="cuIcon-homefill {{PageCur=='index'?'text-pink':'text-gray'}}"></text>
-    </view>
-    <view class="{{pageCur=='index'?'text-pink':'text-gray'}}">首页</view>
-  </view>
-  <view class="action" bindtap="NavChange" data-cur="dynamic">
-    <view class='cuIcon-cu-image'>
-      <text class="cuIcon-peoplefill {{PageCur=='dynamic'?'text-pink':'text-gray'}}"></text>
-    </view>
-    <view class="{{pageCur=='dynamic'?'text-pink':'text-gray'}}">动态</view>
-  </view>
+  <!-- 合集 -->
+  <block wx:if="{{tabCur == 'series'}}">
+    <series-list series="{{series}}"></series-list>
+  </block>
+
 </view>
