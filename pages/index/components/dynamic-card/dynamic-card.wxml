@@ -26,6 +26,7 @@
       <navigator class="text-content" url="/pages/dynamic/detail?dynamic_id={{dynamic.id_str}}">
         <text>{{dynamic.modules.module_dynamic.desc.text}}</text>
       </navigator>
+      <navigator wx:if="{{dynamic.modules.module_dynamic.desc.text.length > 120}}" url="/pages/dynamic/detail?dynamic_id={{dynamic.id_str}}" class="text-right padding-lr padding-tb-sm text-blue" >查看详情...</navigator>
       <view class="grid flex-sub padding-lr col-3 grid-square">
         <block wx:for="{{dynamic.modules.module_dynamic.major.draw.items}}" wx:key="index">
           <view class="bg-img" style="background-image:url({{item.src}});" bindtap="preview" data-image="{{[item.src]}}">

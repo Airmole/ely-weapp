@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view>
-  <about-icon bind:showQrcode="qrcode" />
+  <about-icon bind:showQrcode="showMenu" bind:goInfo="goInfo" />
   <!-- up主信息区 -->
   <user-info uper-info="{{uperInfo}}" uper-card-info="{{uperCardInfo}}"></user-info>
 

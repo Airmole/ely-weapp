@@ -1,8 +1,9 @@
 <view class="cu-custom">
   <view class="cu-bar fixed" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
     <view class="action border-custom" style="width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px);background-color: #f6f0edbf;">
-      <text class="cuIcon-info text-blod" bindtap="go2Info"></text>
-      <text class="cuIcon-qr_code text-blod" bindtap="showQrcode"></text>
+      <text class="cuIcon-info text-xl text-blod" bindtap="go2Info"></text>
+      <button open-type="share" class="cu-btn round" style="width: 80rpx; margin: 0px;padding: 0px;background:transparent;">
+      <text class="cuIcon-sort text-xl text-blod"></text></button>
     </view>
   </view>
 </view>

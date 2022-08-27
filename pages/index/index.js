@@ -254,5 +254,11 @@ Page({
       current: detail,
       urls: [detail]
     })
+  },
+  goInfo () {
+    wx.showToast({
+      icon: 'info',
+      title: '嘿嘿嘿',
+    })
   }
 })
