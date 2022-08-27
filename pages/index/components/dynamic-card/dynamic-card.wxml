@@ -22,7 +22,7 @@
       </view>
     </view>
     <!-- 图文动态 -->
-    <block wx:if="{{dynamic.type == 'DYNAMIC_TYPE_DRAW'}}">
+    <block wx:if="{{dynamic.type == 'DYNAMIC_TYPE_DRAW' || dynamic.type == 'DYNAMIC_TYPE_WORD'}}">
       <navigator class="text-content" url="/pages/dynamic/detail?dynamic_id={{dynamic.id_str}}">
         <text>{{dynamic.modules.module_dynamic.desc.text}}</text>
       </navigator>

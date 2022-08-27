@@ -1,6 +1,6 @@
 <!--index.wxml-->
-<view class="padding-bottom-xl">
-<about-icon/>
+<view>
+  <about-icon bind:showQrcode="qrcode" />
   <!-- up主信息区 -->
   <user-info uper-info="{{uperInfo}}" uper-card-info="{{uperCardInfo}}"></user-info>
 
@@ -127,5 +127,11 @@
   <block wx:if="{{tabCur == 'series'}}">
     <series-list series="{{series}}"></series-list>
   </block>
+
+  <!-- 二维码 -->
+  <view style="position: absolute;top: -99999px;left: -99999px;">
+    <canvas style="width: 100px;height: 100px;" canvas-id="uperQrcode"></canvas>
+    <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess"></poster>
+  </view>
 
 </view>

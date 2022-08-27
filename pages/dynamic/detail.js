@@ -38,7 +38,8 @@ Page({
         res.data.data.card.card = JSON.parse(res.data.data.card.card)
         res.data.data.card.card.item.upload_time_str = util.formatTimestampToDate(res.data.data.card.card.item.upload_time)
         _this.setData({ dynamic: res.data.data.card, title: `${res.data.data.card.card.user.name}的动态` })
-        _this.getDynamicComment(_this.getCommentTypeNum(res.data.data.card.desc.type), res.data.data.card.desc.rid)
+        const oid = res.data.data.card.desc.type == 4 ? _this.data.dynamicId : res.data.data.card.desc.rid
+        _this.getDynamicComment(_this.getCommentTypeNum(res.data.data.card.desc.type), oid)
       }
     })
   },
@@ -47,6 +48,7 @@ Page({
     wx.request({
       url: `${app.globalData.apiDomain}/x/v2/reply/main?type=${type}&oid=${oid}&mode=${mode}&next=${next}&ps=${pagesize}`,
       success(res) {
+        if (res.data.code == -404) return
         if (res.data.data.cursor.is_begin) {
           _this.setData({ comments: res.data.data })
         } else {
@@ -63,12 +65,15 @@ Page({
   orderbyChange (e) {
     const orderby = e.currentTarget.dataset.value
     this.setData({ orderby: orderby })
-    this.getDynamicComment(this.getCommentTypeNum(this.data.dynamic.desc.type), this.data.dynamic.desc.rid, orderby)
+    const oid = this.data.dynamic.desc.type == 4 ? this.data.dynamicId : this.data.dynamic.desc.rid
+    this.getDynamicComment(this.getCommentTypeNum(this.data.dynamic.desc.type), oid, orderby)
   },
   getCommentTypeNum(type) {
     switch (type) {
       case 2:
         return 11
+        case 4:
+          return 17
       default:
         return 11
     }
@@ -84,7 +89,8 @@ Page({
    */
   onReachBottom() {
     if (this.data.comments.cursor.is_end) return
-    this.getDynamicComment(this.getCommentTypeNum(this.data.dynamic.desc.type), this.data.dynamic.desc.rid, this.data.orderby, this.data.comments.cursor.next)
+    const oid = this.data.dynamic.desc.type == 4 ? this.data.dynamicId : this.data.dynamic.desc.rid
+    this.getDynamicComment(this.getCommentTypeNum(this.data.dynamic.desc.type), oid, this.data.orderby, this.data.comments.cursor.next)
   },
 
   /**

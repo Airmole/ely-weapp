@@ -2,6 +2,9 @@
 // 获取应用实例
 const app = getApp()
 const util = require('../../utils/util.js')
+import QR from '../../utils/qrcode'
+import Poster from '../../weapp-canvas/poster/poster'
+const posterConfig = require('./posterConfig')
 
 Page({
   data: {
@@ -12,6 +15,7 @@ Page({
     videoKeyword: '',
     bilibliWeappId: '',
     bilibliWeappVideoPath: '',
+    posterConfig: {},
     tabs: [
       { label: '主页', value: 'home', icon: 'homefill' },
       { label: '动态', value: 'dynamic', icon: 'favorfill' },
@@ -213,5 +217,42 @@ Page({
       }
       this.getUperVideoList(uid, page, this.data.videos.page.ps, this.data.videoOrderby, this.data.videoTid, this.data.videoKeyword)
     }
+  },
+  qrcode() {
+    const mid = this.data.uperCardInfo.card.mid
+    const content = `https://m.bilibili.com/space/${mid}`
+    QR.api.draw(content, 'uperQrcode', 100, 100, this, this.canvasDraw);
+  },
+  canvasDraw() {
+    var _this = this
+    wx.canvasToTempFilePath({
+      canvasId: 'uperQrcode',
+      success: function (res) {
+        let qrcodePath = res.tempFilePath;
+        var qrcodePoster = posterConfig.posterConfig.qrcodeConfig
+        console.log(qrcodePoster)
+        qrcodePoster.images[0].url = _this.data.uperCardInfo.card.face
+        qrcodePoster.images[1].url = qrcodePath
+        qrcodePoster.texts[0].text = _this.data.uperCardInfo.card.name
+        qrcodePoster.texts[1].text = _this.data.uperCardInfo.card.sign
+        qrcodePoster.texts[5].text = _this.data.uperCardInfo.follower.toString()
+        qrcodePoster.texts[6].text = _this.data.uperCardInfo.archive_count.toString()
+        qrcodePoster.texts[7].text = _this.data.uperCardInfo.like_num.toString()
+        qrcodePoster.texts[8].text = 'UID：' + _this.data.uperCardInfo.card.mid.toString()
+        _this.setData({ posterConfig: qrcodePoster }, () => {
+          Poster.create(true);    // 入参：true为抹掉重新生成
+        });
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    });
+  },
+  onPosterSuccess(e) {
+    const { detail } = e;
+    wx.previewImage({
+      current: detail,
+      urls: [detail]
+    })
   }
 })
