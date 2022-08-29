@@ -6,6 +6,12 @@ const formatTimestampToDate = timestamp => {
   return `${month}-${day}`
 }
 
+const getNowTimeDateString = nil => {
+  const now = new Date()
+  const nowString = now.getFullYear() + "-" + ((now.getMonth() < 10 ? ('0' + (now.getMonth() + 1)) : (now.getMonth()) + 1)) + "-" + ((now.getDate() < 10 ? ('0' + (now.getDate())) : (now.getDate()))) + ' ' + ((now.getHours() < 10 ? ('0' + (now.getHours())) : now.getHours())) + ':' + ((now.getMinutes() < 10 ? ('0' + (now.getMinutes())) : now.getMinutes())) + ':' + ((now.getSeconds() < 10 ? ('0' + (now.getSeconds())) : now.getSeconds()))
+  return nowString
+}
+
 const formatNumberColor = n => {
   n = n.toString(16)
   if (String(n).length > 6) {
@@ -34,5 +40,6 @@ const formatSecondsToDateString = second => {
 module.exports = {
   formatTimestampToDate,
   formatNumberColor,
-  formatSecondsToDateString
+  formatSecondsToDateString,
+  getNowTimeDateString
 }

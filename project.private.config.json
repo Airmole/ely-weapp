@@ -3,7 +3,19 @@
   "projectname": "ely-weapp",
   "setting": {
     "compileHotReLoad": false,
-    "urlCheck": false
+    "urlCheck": true
   },
-  "condition": {}
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "pages/rank/index",
+          "query": "date=20220821",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

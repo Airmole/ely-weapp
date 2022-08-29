@@ -1,0 +1,11 @@
+<view class="cu-custom">
+  <view class="cu-bar fixed justify-between" style="height:{{CustomBar}}px;padding-top:{{StatusBar}}px;">
+    <view class="action border-custom" style="width:{{Custom.width}}px;height:{{Custom.height}}px;margin-left:calc(750rpx - {{Custom.right}}px);background-color: #f6f0ede0;">
+      <text class="cuIcon-back" bindtap="toHome"></text>
+      <text class="cuIcon-down" bindtap="download"></text>
+    </view>
+    <view class="title margin-top margin-lr padding-right">
+      <slot name="content"></slot>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,40 @@
+<!--pages/rank/index.wxml-->
+<!-- 顶部操作栏 -->
+<top-toolbar bind:download="download">
+  <picker slot="content" mode="date" value="{{dateString}}" bindchange="dateChange">
+    <view class="picker text-white text-title text-xl">
+      {{dateString}}
+    </view>
+  </picker>
+</top-toolbar>
+
+<view class="padding margin-top-xl" wx:if="{{loaded}}">
+  <!-- 弹幕活跃榜 -->
+  <view class="user-rank margin-top-xl padding-top-xl">
+    <ec-canvas id="userRank" canvas-id="userRank" ec="{{ userRank }}"></ec-canvas>
+  </view>
+  <view class="pie-graph">
+    <ec-canvas id="pieGraph" canvas-id="pieGraph" ec="{{ pieGraph }}"></ec-canvas>
+  </view>
+  <view class="time-line">
+    <ec-canvas id="timeLine" canvas-id="timeLine" ec="{{ timeLine }}"></ec-canvas>
+  </view>
+  <view class="margin-top-xl padding-top-xl flex-wrap justift-center">
+    <view class="text-center"><text class="text-center text-white text-xxl text-blod">词云图</text></view>
+    <view class="text-center">
+      <image src="{{wordcloud}}" mode="widthFix"></image>
+    </view>
+  </view>
+</view>
+<view wx:else class="margin-top-xl padding-xl">
+  <view class="margin-top-xl padding-xl text-center">
+    <image src="https://raw.githubusercontent.com/cong-min/wecqupt/master/images/index/nothing.png"></image>
+    <view class="text-xxl text-bold text-white margin-top-xl">暂未公布，请选择其他日期</view>
+  </view>
+</view>
+
+<!-- 二维码&海报图 -->
+<view style="position: absolute;top: -99999px;left: -99999px;">
+  <canvas style="width: 100px;height: 100px;" canvas-id="qrcode"></canvas>
+  <poster id="poster" config="{{posterConfig}}" bind:success="onPosterSuccess"></poster>
+</view>

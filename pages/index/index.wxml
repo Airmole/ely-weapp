@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view>
-  <about-icon bind:showQrcode="showMenu" bind:goInfo="goInfo" />
+  <about-icon bind:showQrcode="showMenu" bind:goInfo="goFaq" />
   <!-- up主信息区 -->
   <user-info uper-info="{{uperInfo}}" uper-card-info="{{uperCardInfo}}"></user-info>
 
@@ -84,6 +84,25 @@
         </view>
       </view>
     </navigator>
+
+    <!-- 昨日弹幕排行 -->
+    <navigator url="../rank/index">
+      <view class="cu-bar bg-white solid-bottom margin-top radius-top margin-lr-sm">
+        <view class="action text-bold">
+          昨日弹幕榜({{dateString}})
+        </view>
+        <view class='action'>
+          查看所有 <text class="cuIcon-right"></text>
+        </view>
+      </view>
+      <view wx:if="{{isUserRankLoaded}}" class="margin-bottom margin-lr-sm shadow-warp user-rank radius-bottom padding-lr-sm">
+        <ec-canvas id="userRank" canvas-id="userRank" ec="{{ userRank }}"></ec-canvas>
+      </view>
+      <view wx:else class="bg-white margin-bottom margin-lr-sm shadow-wrap radius-bottom padding-lr-sm">
+        <view class="text-center padding"><text class="text-xxl text-bold">暂未公布~</text></view>
+      </view>
+    </navigator>
+
     <!-- 视频投稿 -->
     <view class="margin-tb margin-lr-sm shadow-warp">
       <view class="cu-bar bg-white solid-bottom radius-top">

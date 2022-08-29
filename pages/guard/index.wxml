@@ -1,48 +1,53 @@
 <!--pages/guard/index.wxml-->
 <!-- 标题栏 -->
 <cu-custom bgColor="bg-purple" isCustom="{{true}}">
-  <view slot="content">Ta的大航海</view>
+  <view slot="content">伊利的大航海</view>
 </cu-custom>
 
-<!-- 顶部背景图 -->
-<view class="bg-image image-header flex justify-center" style="background-image: url('{{bgHeader}}');">
-  <view class="text-title text-xl nickname text-center text-cut">{{uperName}}({{guards.info.num}})</view>
+<view class="margin-top-xl padding-top-xl text-center" wx:if="{{isLoading}}">
+  <image class="remind-img" src="/colorui/loading.gif"></image>
 </view>
+<block wx:else>
+  <!-- 顶部背景图 -->
+  <view class="bg-image image-header flex justify-center" style="background-image: url('{{bgHeader}}');">
+    <view class="text-title text-xl nickname text-center text-cut">{{uperName}}({{guards.info.num}})</view>
+  </view>
 
-<!-- 排行榜内容 -->
-<view class="bg-img" style="background-image: url({{fillImage}});" wx:for="{{guards.data}}" wx:key="index">
-  <view class="padding-lr-xl padding-tb-xs text-black">
-    <view class="padding-xs text-xl">
-      <view class="flex align-center">
-        <view class="number flex align-center justify-between">
-          <block wx:if="{{index < 3}}">
-            <image class="icon-size" src="{{top3icon[index]}}"></image>
-          </block>
-          <block wx:else>
-            <view class="text-center flex align-center justify-center icon-size"><text class="text-black">{{item.rank}}</text></view>
-          </block>
-        </view>
-        <view class="margin-left-sm">
-          <view class="cu-avatar round lg" style="background-image:url({{item.face}});"></view>
-        </view>
-        <view class="margin-tb-sm text-cut text-center" style="width: 300rpx;"><text class="text-lg">{{item.username}}</text></view>
-        <view class="padding-left-xs padding-tb-sm" style="width: 180rpx;">
-          <view class="cu-capsule radius">
-            <view style="background:linear-gradient(to right,\#{{item.medal_info.start_color}}, \#{{item.medal_info.end_color}});border-color: {{item.medal_info.border_color}};" class="cu-tag sm text-white">
-              <image style="margin-left: -30rpx;" class="guard-icon" src="{{guardLevelIcons[item.guard_level]}}@44w_44h.webp"></image>
-              {{ item.medal_info.medal_name }}
+  <!-- 排行榜内容 -->
+  <view class="bg-img" style="background-image: url({{fillImage}});" wx:for="{{guards.data}}" wx:key="index">
+    <view class="padding-lr-xl padding-tb-xs text-black">
+      <view class="padding-xs text-xl">
+        <view class="flex align-center">
+          <view class="number flex align-center justify-between">
+            <block wx:if="{{index < 3}}">
+              <image class="icon-size" src="{{top3icon[index]}}"></image>
+            </block>
+            <block wx:else>
+              <view class="text-center flex align-center justify-center icon-size"><text class="text-black">{{item.rank}}</text></view>
+            </block>
+          </view>
+          <view class="margin-left-sm">
+            <view class="cu-avatar round lg" style="background-image:url({{item.face}});"></view>
+          </view>
+          <view class="margin-tb-sm text-cut text-center" style="width: 320rpx;"><text class="text-lg">{{item.username}}</text></view>
+          <view class="padding-left-xs padding-tb-sm" style="width: 140rpx;">
+            <view class="cu-capsule radius">
+              <view style="background:linear-gradient(to right,\#{{item.medal_info.start_color}}, \#{{item.medal_info.end_color}});border-color: {{item.medal_info.border_color}};" class="cu-tag sm text-white">
+                <image style="margin-left: -30rpx;" class="guard-icon" src="{{guardLevelIcons[item.guard_level]}}@44w_44h.webp"></image>
+                {{ item.medal_info.medal_name }}
+              </view>
+              <view class="cu-tag line-black sm">{{item.medal_info.medal_level}}</view>
             </view>
-            <view class="cu-tag line-black sm">{{item.medal_info.medal_level}}</view>
           </view>
         </view>
       </view>
     </view>
   </view>
-</view>
-<!-- 空数据展示 -->
-<view class="bg-img padding-xl text-center" style="background-image: url({{fillImage}});" wx:if="{{guards.info.num <= 0}}">
-  <view class="text-xl">暂时还没有人哦~</view>
-</view>
+  <!-- 空数据展示 -->
+  <view class="bg-img padding-xl text-center" style="background-image: url({{fillImage}});" wx:if="{{guards.info.num <= 0}}">
+    <view class="text-xl">暂时还没有人哦~</view>
+  </view>
 
-<!-- 尾图 -->
-<image class="image-footer" src="{{bgFooter}}" mode="widthFix" widthFix></image>
+  <!-- 尾图 -->
+  <image class="image-footer" src="{{bgFooter}}" mode="widthFix" widthFix></image>
+</block>

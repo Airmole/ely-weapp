@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "top-toolbar": "./components/top-toolbar/top-toolbar",
+    "ec-canvas": "../../echarts/ec-canvas",
+    "poster": "/weapp-canvas/poster"
+  }
+}

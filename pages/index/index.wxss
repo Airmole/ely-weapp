@@ -25,3 +25,8 @@ page {
   height: 80rpx;
   overflow: hidden;
 }
+
+.user-rank {
+  height: 1200rpx;
+  background-color: white;
+}

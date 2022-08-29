@@ -3,7 +3,9 @@
     "pages/index/index",
     "pages/guard/index",
     "pages/dynamic/detail",
-    "pages/series/detail"
+    "pages/series/detail",
+    "pages/rank/index",
+    "pages/faq/index"
   ],
   "window":{
     "navigationStyle":"custom",

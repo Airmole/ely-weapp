@@ -1,0 +1,17 @@
+/* pages/rank/index.wxss */
+page {
+  background-color: #0E1B4B;
+  /* padding-bottom: 30rpx; */
+}
+
+.user-rank {
+  height: 600px;
+}
+
+.pie-graph {
+  height: 320px;
+}
+
+.time-line {
+  height: 250px;
+}

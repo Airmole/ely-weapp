@@ -10,3 +10,8 @@
   padding: 200rpx 0;
   box-sizing: border-box;
 } 
+.remind-img {
+  width: 250rpx;
+  height: 250rpx;
+  padding-bottom: 25rpx;
+}

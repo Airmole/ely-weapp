@@ -5,6 +5,7 @@
     "dynamic-card": "./components/dynamic-card/dynamic-card",
     "video-content": "./components/video-content/video-content",
     "series-list": "./components/series-list/series-list",
-    "poster": "/weapp-canvas/poster"
+    "poster": "/weapp-canvas/poster",
+    "ec-canvas": "../../echarts/ec-canvas"
   }
 }

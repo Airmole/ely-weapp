@@ -1,0 +1,5 @@
+/* colorui/components/cu-custom.wxss */
+
+.title {
+  height: 60rpx;
+}

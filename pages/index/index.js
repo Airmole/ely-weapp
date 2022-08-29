@@ -5,10 +5,27 @@ const util = require('../../utils/util.js')
 import QR from '../../utils/qrcode'
 import Poster from '../../weapp-canvas/poster/poster'
 const posterConfig = require('./posterConfig')
+import * as echarts from '../../echarts/echarts.min'
+const userRankConfig = require('./userRank')
+
+function setOption(chart, user_rank) {
+  let userRank = userRankConfig.userRank
+  let labels = []
+  for (let s of user_rank.label.slice(0, 20).reverse()) {
+    let nickname = s
+    if (s.length >= 8) {
+      nickname = s.substr(0, 5) + '...'
+    }
+    labels.push(nickname)
+  }
+
+  userRank.yAxis.data = labels
+  userRank.series[0].data = user_rank.value.slice(0, 20).reverse()
+  chart.setOption(userRank, user_rank);
+}
 
 Page({
   data: {
-    pageCur: 'index',
     tabCur: 'home',
     videoOrderby: 'pubdate',
     videoTid: '0',
@@ -29,23 +46,42 @@ Page({
     topGuard: {},
     charge: {},
     videos: {},
-    series: {}
+    series: {},
+    userRank: {
+      lazyLoad: true
+    },
+    isUserRankLoaded: true,
+    dateString: ''
   },
-  onLoad() {
+  onLoad(options) {
     console.log('主播的UID为：', app.globalData.uid)
     const uid = app.globalData.uid
-    this.getHomePageData(uid)
+    this.getHomePageData(uid, options)
     this.setData({
       bilibliWeappId: app.globalData.bilibliWeappId,
       bilibliWeappVideoPath: app.globalData.bilibliWeappVideoPath
     })
   },
-  getHomePageData(uid) {
+  onReady: function () {
+    // 获取组件
+    this.ecComponent = this.selectComponent('#userRank');
+  },
+  getHomePageData(uid, options) {
     this.getUperUserinfo(uid)
     this.getUperCardInfo(uid)
     this.getUperChargeData(uid)
     this.getUperVideoList(uid)
     this.getUperSeriesList(uid)
+
+    let date = options.date ? options.date : '';
+    if (date == '') {
+      var day = new Date();
+      day.setTime(day.getTime() - 24 * 60 * 60 * 1000);
+      date = day.getFullYear() + "" + ((day.getMonth() < 10 ? ('0' + (day.getMonth() + 1)) : (day.getMonth()) + 1)) + "" + ((day.getDate() < 10 ? ('0' + (day.getDate())) : (day.getDate())));
+    }
+    const dateString = date.substr(0, 4) + '-' + date.substr(4, 2) + '-' + date.substr(6, 2)
+    this.setData({ dateString: dateString })
+    this.getUserRankData(date)
   },
   getUperUserinfo(uid) {
     var _this = this
@@ -164,6 +200,19 @@ Page({
       }
     })
   },
+  getUserRankData(date = '') {
+    var _this = this
+    wx.request({
+      url: `${app.globalData.yiliApiDomain}/static/json/${date}.json`,
+      success(res) {
+        if (res.statusCode == '200') {
+          _this.setUserRankGraphData(res.data.user_rank)
+        } else {
+          _this.setData({ isUserRankLoaded: false })
+        }
+      }
+    })
+  },
   formatMedalColor(medal_info) {
     medal_info.start_color = util.formatNumberColor(medal_info.medal_color_start)
     medal_info.end_color = util.formatNumberColor(medal_info.medal_color_end)
@@ -177,15 +226,13 @@ Page({
   go2video() {
     this.setData({ tabCur: 'video' })
   },
-  tabSelect(e) {
-    const tab = e.currentTarget.dataset.id
+  tabSelect(e, options = {}) {
+    const tab = e.currentTarget ? e.currentTarget.dataset.id : e
     const uid = app.globalData.uid
-    if (tab == 'home') {
-      this.getHomePageData(uid)
-    }
-    if (tab == 'dynamic') {
-      this.getSpaceDynamicList(uid)
-    }
+    if (tab == 'home') this.getHomePageData(uid, options)
+    if (tab == 'dynamic') this.getSpaceDynamicList(uid)
+    if (tab == 'video') this.getUperVideoList(uid)
+    if (tab == 'series') this.getUperSeriesList(uid)
     this.setData({ tabCur: tab })
   },
   videoTidChanged(e) {
@@ -255,10 +302,34 @@ Page({
       urls: [detail]
     })
   },
-  goInfo () {
-    wx.showToast({
-      icon: 'info',
-      title: '嘿嘿嘿',
-    })
+  setUserRankGraphData(userRank) {
+    this.ecComponent.init((canvas, width, height, dpr) => {
+      // 获取组件的 canvas、width、height 后的回调函数
+      // 在这里初始化图表
+      const chart = echarts.init(canvas, null, {
+        width: width,
+        height: height,
+        devicePixelRatio: dpr // new
+      });
+      setOption(chart, userRank);
+
+      // 将图表实例绑定到 this 上，可以在其他成员函数（如 dispose）中访问
+      this.chart = chart;
+      this.setData({ isUserRankLoaded: true });
+      // 注意这里一定要返回 chart 实例，否则会影响事件处理等
+      return chart;
+    });
+  },
+  goFaq() {
+    wx.navigateTo({ url: '/pages/faq/index' })
+  },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    return {
+      path: `pages/index/index`,
+      title: `伊利齁甜`,
+    }
   }
 })

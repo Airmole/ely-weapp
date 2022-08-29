@@ -1,6 +1,6 @@
 <!--pages/dynamic/detail.wxml-->
 <cu-custom bgColor="bg-pink" isCustom="{{true}}">
-  <view slot="content">{{title}}</view>
+  <view slot="content">{{dynamic.card.user.name || dynamic.card.user.uname}}的动态</view>
 </cu-custom>
 
 <!-- 仅适用于图文动态 -->

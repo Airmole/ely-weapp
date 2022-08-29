@@ -2,13 +2,11 @@
 const app = getApp()
 const util = require('../../utils/util.js')
 Page({
-
   /**
    * 页面的初始数据
    */
   data: {
     dynamicId: '',
-    title: '',
     orderby: '3',
     oderbyOptions: [
       { label: '按热度排序', value: '3' },
@@ -36,8 +34,8 @@ Page({
       url: `${app.globalData.vcApiDomain}/dynamic_svr/v1/dynamic_svr/get_dynamic_detail?dynamic_id=${dynamicId}`,
       success(res) {
         res.data.data.card.card = JSON.parse(res.data.data.card.card)
-        res.data.data.card.card.item.upload_time_str = util.formatTimestampToDate(res.data.data.card.card.item.upload_time)
-        _this.setData({ dynamic: res.data.data.card, title: `${res.data.data.card.card.user.name}的动态` })
+        res.data.data.card.card.item.upload_time_str = util.formatTimestampToDate(res.data.data.card.card.item.upload_time ? res.data.data.card.card.item.upload_time : res.data.data.card.card.item.timestamp)
+        _this.setData({ dynamic: res.data.data.card })
         const oid = res.data.data.card.desc.type == 4 ? _this.data.dynamicId : res.data.data.card.desc.rid
         _this.getDynamicComment(_this.getCommentTypeNum(res.data.data.card.desc.type), oid)
       }
@@ -92,11 +90,15 @@ Page({
     const oid = this.data.dynamic.desc.type == 4 ? this.data.dynamicId : this.data.dynamic.desc.rid
     this.getDynamicComment(this.getCommentTypeNum(this.data.dynamic.desc.type), oid, this.data.orderby, this.data.comments.cursor.next)
   },
-
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {
-
+  onShareAppMessage: function () {
+    const nickname = this.data.dynamic.card.user.name || this.data.dynamic.card.user.uname
+    const dynamicId = this.data.dynamicId
+    return {
+      path: `pages/dynamic/detail?dynamic_id=${dynamicId}`,
+      title: `${nickname}的动态`,
+    }
   }
 })

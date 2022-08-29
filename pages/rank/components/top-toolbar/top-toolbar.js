@@ -11,22 +11,15 @@ Component({
    * 组件的对外属性
    */
   properties: {
-    bgColor: {
+    date: {
       type: String,
-      default: ''
-    }, 
-    isCustom: {
-      type: [Boolean, String],
-      default: false
+      value: '',
     },
-    isBack: {
-      type: [Boolean, String],
-      default: false
-    },
-    bgImage: {
-      type: String,
-      default: ''
-    },
+  },
+
+  lifetimes: {
+    attached: function () {
+    }
   },
   /**
    * 组件的初始数据
@@ -34,24 +27,22 @@ Component({
   data: {
     StatusBar: app.globalData.StatusBar,
     CustomBar: app.globalData.CustomBar,
-    Custom: app.globalData.Custom
+    Custom: app.globalData.Custom,
+    dateString: ''
   },
   /**
    * 组件的方法列表
    */
   methods: {
-    BackPage() {
+    toHome () {
       wx.navigateBack({
-        delta: 1,
         fail () {
           wx.redirectTo({ url: '/pages/index/index' })
         }
-      });
-    },
-    toHome(){
-      wx.reLaunch({
-        url: '/pages/index/index',
       })
+    },
+    download () {
+      this.triggerEvent('download')
     }
   }
 })

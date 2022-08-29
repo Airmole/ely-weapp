@@ -6,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isLoading: true,
     uperName: '',
     roomid: '',
     uid: '',
@@ -41,6 +42,15 @@ Page({
     this.setData({ uperName: uperName, roomid: roomid, uid: uid })
     this.getLiveroomTopGuard(roomid, uid)
   },
+  /**
+  * 生命周期函数--监听页面初次渲染完成
+  */
+  onReady: function () {
+    var that = this
+    setTimeout(function () {
+      that.setData({ isLoading: false });
+    }, 1000);
+  },
   getLiveroomTopGuard(roomid, ruid, page = 1, pagesize = 29) {
     var _this = this
     wx.request({
@@ -53,11 +63,11 @@ Page({
             guards.top3[index].medal_info = _this.formatMedalColor(element.medal_info)
           })
           guards.data = guards.top3.concat(guards.list)
-        } 
+        }
         guards.list.forEach((element, index) => {
           guards.list[index].medal_info = _this.formatMedalColor(element.medal_info)
         })
-        if(guards.info.now > 1) guards.data = _this.data.guards.data.concat(guards.list)
+        if (guards.info.now > 1) guards.data = _this.data.guards.data.concat(guards.list)
         _this.setData({ guards: guards })
       }
     })
@@ -80,11 +90,13 @@ Page({
       this.getLiveroomTopGuard(this.data.roomid, this.data.uid, nextPage)
     }
   },
-
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage() {
-
+  onShareAppMessage: function () {
+    return {
+      path: `pages/guard/index`,
+      title: `伊利的大航海们`,
+    }
   }
 })

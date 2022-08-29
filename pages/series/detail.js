@@ -8,7 +8,7 @@ Page({
    */
   data: {
     sid: '',
-    title: '合视频集',
+    title: '视频合集',
     bilibliWeappId: '',
     bilibliWeappVideoPath: '',
     series: {},
@@ -50,13 +50,6 @@ Page({
     if (currentPage * pagesize >= total) return
     const page = currentPage + 1
     this.getSeriesVideoList(app.globalData.uid, this.data.sid, this.data.videoOrderby, page)
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
   },
   getSeriesVideoList(uid = '', sid = '', sort = 'desc', pn = '1', ps = '30') {
     var _this = this
@@ -109,4 +102,15 @@ Page({
     const image = e.currentTarget.dataset.image
     wx.previewImage({ urls: image })
   },
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    const title = this.data.title
+    const sid = this.data.sid
+    return {
+      path: `pages/series/detail?sid=${sid}`,
+      title: `【${title}】视频合集`,
+    }
+  }
 })

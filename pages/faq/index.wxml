@@ -1,0 +1,183 @@
+<!--pages/faq/index.wxml-->
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">常见问题（FAQ）</view>
+</cu-custom>
+
+<view class="cu-chat">
+  <!-- 简述 -->
+  <view class="cu-item padding-bottom-none">
+    <view class="cu-avatar radius" style="background-image:url({{elyAvatar}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>啥啥啥？这啥呀？这是个啥玩意？</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item self padding-bottom-none">
+    <view class="main">
+      <view class="content bg-green shadow">
+        <text>这是一款专为伊利打造的微信小程序。之所以捣鼓出来这么一款微信小程序有以下几点原因：\r
+          1. 算是送给伊伊的一个小礼物，希望能于微信生态环境之下更好地推广、分享、曝光宝藏伊伊,尝试引导更多的微信平台用户流密切关注，尽可能的减少微信与哔哩哔哩平台之间的内容跳转壁垒;\r
+          2. 也是给自己的一个小作品，从自己的专业技术角度,希望能对自己的技术水平带来一些微不足道的小提升;\r
+          3. 送给喜欢支持伊利的大家伙儿们~希望大家继续喜欢伊利，多多支持她\r
+          4. 就想做，想到了就做了。边听直播就边做了。。🐶
+        </text>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{myAvatar}});"></view>
+  </view>
+  <!-- 名称问题 -->
+  <view class="cu-item padding-bottom-none">
+    <view class="cu-avatar radius" style="background-image:url({{elyAvatar}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>为啥叫“伊伊齁甜”，而不是“伊利齁甜”？</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item self padding-bottom-none">
+    <view class="main">
+      <image src="{{aboutName}}" class="radius" mode="widthFix" data-image="{{[aboutName]}}" bindtap="preview"></image>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{myAvatar}});"></view>
+  </view>
+  <!-- 音视频播放问题 -->
+  <view class="cu-item padding-bottom-none">
+    <view class="cu-avatar radius" style="background-image:url({{elyAvatar}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>为什么不能直接播放视频投稿？还要二次跳转？是不是你技术水平菜逼，不会开发音视频播放？</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item self padding-bottom-none">
+    <view class="main">
+      <view class="content bg-green shadow">
+        <text>这还真不是技术问题，这是个政策限制问题。根据相关部门以及微信小程序要求，需要提供《信息网络传播视听节目许可证》、《全国网络视听平台信息登记管理系统》备案 等资质证件，且小程序主体不能为个人主体。\r
+          因此对于视频投稿均跳转到哔哩哔哩官方小程序。而对于电台音频投稿作品，由于官方的哔哩哔哩微信小程序也不支持小程序内播放，因此只能粘贴网页链接访问欣赏。\r
+          (垃圾阿哔！(╯‵□′)╯︵┻━┻
+        </text>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{myAvatar}});"></view>
+  </view>
+  <!-- 评论点赞互动 -->
+  <view class="cu-item padding-bottom-none">
+    <view class="cu-avatar radius" style="background-image:url({{elyAvatar}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>为什么只能浏览？不能点赞、评论、转发？</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item self padding-bottom-none">
+    <view class="main">
+      <view class="content bg-green shadow">
+        <text>1. 同上，评论属于UGC社区性质类型，要求需要有资质主体及相关备案，且不对个人主体小程序开放;\r
+          2. 评论、留言、转发、点赞等行为操作，意味着您必须要登录您的B站账号。非官方的小程序登录您的B站账号，您真的会放心吗？为了安全，不侵犯收集您的数据信息，永远也不会加上这个功能; \r
+          3. 对于这个小程序的定位大致就是将B站账号以一种类似于博客概念的形势来展示呈现出来，以小程序为媒介载体，在微信生态平台下推广自己的B站账号，达到引流的目的; \r
+          4. 尽可能，尽最大程度的简化程序，减少接口数量，降低服务器负载，能省则省。每个月的服务器运维成本长期下来数目不菲啊。
+        </text>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{myAvatar}});"></view>
+  </view>
+  <!-- 访问慢 -->
+  <view class="cu-item padding-bottom-none">
+    <view class="cu-avatar radius" style="background-image:url({{elyAvatar}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>为什么弹幕排行榜相关的访问很慢？</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item self padding-bottom-none">
+    <view class="main">
+      <view class="content bg-green shadow">
+        <view>出于服务器运维成本的考量，弹幕排行榜数据以及<text class="text-blue" bindtap="copy" data-content="{{elyWeb}}">{{elyWeb}}</text>服务托管于Github，服务器位于海外，域名CNAME到GitPage，因为受网络环境，流量管控等因素影响，部分地区或ISP网络服务不够稳定导致加载慢或无法加载，请自行设法优化自己的网络环境。</view>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{myAvatar}});"></view>
+  </view>
+  <!-- 直播 -->
+  <view class="cu-item padding-bottom-none">
+    <view class="cu-avatar radius" style="background-image:url({{elyAvatar}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>能直接看到伊利的直播节目吗？</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item self padding-bottom-none">
+    <view class="main">
+      <view class="content bg-green shadow">
+        <view>抱歉，也不能，原因基本同上。况且直播涉及礼物打赏，还是老老实实去APP或者PC网页吧。</view>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{myAvatar}});"></view>
+  </view>
+  <!-- 开发 -->
+  <view class="cu-item padding-bottom-none">
+    <view class="cu-avatar radius" style="background-image:url({{elyAvatar}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>这个小程序怎么搞的啊？我也想给我自己的B站号搞一个</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item self padding-bottom-none">
+    <view class="main">
+      <view class="content bg-green shadow">
+        <view>除弹幕排行榜相关数据外，其余数据均来自B站网页数据接口抓包，即数据与B站官方数据完全同步一致。在有了数据内容的基础之上，您可能需要稍微了解一些Web相关的程序开发技术，HTTP(S)协议，HTML、JavaScript是必备基础技能。再阅读了解微信官方的小程序开发者文档，参考本程序代码构建您自己专属的微信小程序。目前已经将所有通用模块抽离出来，作为一个额外的新开源项目Bilog(Bi-log, BiliBili-Blog)，只需要配置好B站账号UID即可。但是目前还没有详细的配置说明文档。如果您有能力有基础，可以扒代码上手了。其实也不用改很多地方\r
+          Bilog源码链接：<text bindtap="copy" data-content="{{bilogUrl}}" class="text-blue">{{bilogUrl}}</text></view>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{myAvatar}});"></view>
+  </view>
+  <!-- 贡献 -->
+  <view class="cu-item padding-bottom-none">
+    <view class="cu-avatar radius" style="background-image:url({{elyAvatar}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>这个我也会，我也想一起参与“伊伊齁甜”微信小程序的开发维护~</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-item self padding-bottom-none">
+    <view class="main">
+      <view class="content bg-green shadow">
+        <view>好啊，没问题啊。来来来~\r
+          Github会用吧？你自己先fork一份，改你fork的代码，改好后Pull Requests发起合并，review代码无误后合并入main分支，正式提交发布上线就好啦~
+          <view><text class="cuIcon-github">Github：</text><text bindtap="copy" data-content="{{elyWeapp}}" class="text-blue">{{elyWeapp}}</text></view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-avatar radius" style="background-image:url({{myAvatar}});"></view>
+  </view>
+  <!-- 意见反馈 -->
+  <view class="cu-item padding-bottom-none">
+    <view class="cu-avatar radius" style="background-image:url({{elyAvatar}});"></view>
+    <view class="main">
+      <view class="content shadow">
+        <text>程序在我手机上好像有点小Bug，能优化一下嘛？</text>
+      </view>
+    </view>
+  </view>
+  <view class="cu-info">
+    <view>感谢您的使用反馈，请您截图后，点击下方的“使用反馈”，提交反馈。</view>
+    <view class="flex flex-wrap justify-center"><button open-type="feedback" class="text-blue text-df text-center" style="width: 150rpx; margin: 0px;padding: 0px;background:transparent;">使用反馈</button></view>
+  </view>
+</view>
+
+<!-- 底部假输入框 -->
+<view class="cu-bar foot input {{InputBottom!=0?'cur':''}}" style="bottom:{{InputBottom}}px">
+  <view class="action">
+    <text class="cuIcon-sound text-grey"></text>
+  </view>
+  <input class="solid-bottom" bindfocus="InputFocus" bindblur="InputBlur" adjust-position="{{false}}" focus="{{false}}" maxlength="300" cursor-spacing="10" disabled></input>
+  <view class="action">
+    <text class="cuIcon-emojifill text-grey"></text>
+  </view>
+  <button style="width: 120rpx;" class="cu-btn bg-green shadow">发送</button>
+</view>

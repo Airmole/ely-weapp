@@ -5,6 +5,7 @@ App({
   },
   globalData: {
     apiDomain: 'https://lib.airmole.cn/bilibili',
+    yiliApiDomain: 'https://yili.airmole.cn',
     liveApiDomain: 'https://lib.airmole.cn/bililive',
     vcApiDomain: 'https://api.vc.bilibili.com',
     uid: '373782549',
