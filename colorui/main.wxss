@@ -2139,7 +2139,7 @@ button.icon.lg {
 }
 
 .cu-chat .cu-item>.main {
-	max-width: calc(100% - 260rpx);
+	max-width: calc(100% - 220rpx);
 	margin: 0 40rpx;
 	display: flex;
 	align-items: center;
@@ -2159,7 +2159,7 @@ button.icon.lg {
 	position: relative;
 	min-height: 80rpx;
 	line-height: 40rpx;
-	text-align: left;
+  text-align: left;
 }
 
 .cu-chat .cu-item>.main .content:not([class*="bg-"]) {

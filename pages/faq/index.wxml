@@ -129,8 +129,9 @@
   <view class="cu-item self padding-bottom-none">
     <view class="main">
       <view class="content bg-green shadow">
-        <view>除弹幕排行榜相关数据外，其余数据均来自B站网页数据接口抓包，即数据与B站官方数据完全同步一致。在有了数据内容的基础之上，您可能需要稍微了解一些Web相关的程序开发技术，HTTP(S)协议，HTML、JavaScript是必备基础技能。再阅读了解微信官方的小程序开发者文档，参考本程序代码构建您自己专属的微信小程序。目前已经将所有通用模块抽离出来，作为一个额外的新开源项目Bilog(Bi-log, BiliBili-Blog)，只需要配置好B站账号UID即可。但是目前还没有详细的配置说明文档。如果您有能力有基础，可以扒代码上手了。其实也不用改很多地方\r
-          Bilog源码链接：<text bindtap="copy" data-content="{{bilogUrl}}" class="text-blue">{{bilogUrl}}</text></view>
+        <view style="overflow: hidden;">除弹幕排行榜相关数据外，其余数据均来自B站网页数据接口抓包，即数据与B站官方数据完全同步一致。在有了数据内容的基础之上，您可能需要稍微了解一些Web相关的程序开发技术，HTTP(S)协议，HTML、JavaScript是必备基础技能。再阅读了解微信官方的小程序开发者文档，参考本程序代码构建您自己专属的微信小程序。目前已经将所有通用模块抽离出来，作为一个额外的新开源项目Bilog(Bi-log, BiliBili-Blog)，只需要配置好B站账号UID即可。但是目前还没有详细的配置说明文档。如果您有能力有基础，可以扒代码上手了。其实也不用改很多地方\r
+          Bilog源码链接：<view bindtap="copy" data-content="{{bilogUrl}}" class="text-blue">{{bilogUrl}}</view>
+        </view>
       </view>
     </view>
     <view class="cu-avatar radius" style="background-image:url({{myAvatar}});"></view>
@@ -147,7 +148,7 @@
   <view class="cu-item self padding-bottom-none">
     <view class="main">
       <view class="content bg-green shadow">
-        <view>好啊，没问题啊。来来来~\r
+        <view style="overflow: hidden;">好啊，没问题啊。来来来~\r
           Github会用吧？你自己先fork一份，改你fork的代码，改好后Pull Requests发起合并，review代码无误后合并入main分支，正式提交发布上线就好啦~
           <view><text class="cuIcon-github">Github：</text><text bindtap="copy" data-content="{{elyWeapp}}" class="text-blue">{{elyWeapp}}</text></view>
         </view>
@@ -164,8 +165,8 @@
       </view>
     </view>
   </view>
-  <view class="cu-info">
-    <view>感谢您的使用反馈，请您截图后，点击下方的“使用反馈”，提交反馈。</view>
+  <view class="cu-info text-center">
+    <view>感谢您的使用反馈，请您截图后，点击下方的“使用反馈”提交反馈</view>
     <view class="flex flex-wrap justify-center"><button open-type="feedback" class="text-blue text-df text-center" style="width: 150rpx; margin: 0px;padding: 0px;background:transparent;">使用反馈</button></view>
   </view>
 </view>

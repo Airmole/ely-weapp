@@ -16,7 +16,7 @@
   </scroll-view>
 
   <!-- 主页 -->
-  <block wx:if="{{tabCur == 'home'}}">
+  <view hidden="{{tabCur !== 'home'}}">
     <!-- 充电 -->
     <view class="cu-bar bg-white solid-bottom margin-tb-sm radius margin-lr-sm">
       <view class="action">
@@ -86,7 +86,7 @@
     </navigator>
 
     <!-- 昨日弹幕排行 -->
-    <navigator url="../rank/index">
+    <navigator url="../rank/index" hidden="{{!isUserRankLoaded}}">
       <view class="cu-bar bg-white solid-bottom margin-top radius-top margin-lr-sm">
         <view class="action text-bold">
           昨日弹幕榜({{dateString}})
@@ -128,7 +128,7 @@
         </view>
       </view>
     </view>
-  </block>
+  </view>
 
   <!-- 动态 -->
   <block wx:if="{{tabCur == 'dynamic'}}">

@@ -94,9 +94,12 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    const nickname = this.data.uperName
+    const roomid = this.data.roomid
+    const uid = this.data.uid
     return {
-      path: `pages/guard/index`,
-      title: `伊利的大航海们`,
+      path: `pages/guard/index?nickname=${nickname}&roomid=${roomid}&uid=${uid}`,
+      title: `${nickname}的大航海们`,
     }
   }
 })
