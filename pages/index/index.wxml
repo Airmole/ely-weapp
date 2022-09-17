@@ -7,7 +7,7 @@
   <!-- 导航栏 -->
   <scroll-view scroll-x class="bg-white nav">
     <view class="flex text-center">
-      <block wx:for="{{tabs}}" wx:key="index">
+      <block wx:for="{{tabs}}" wx:key="index" wx:if="{{!(item.value=='video' && !videos.list.vlist)}}">
         <view class="cu-item flex-sub {{item.value==tabCur?'text-pink cur':''}}" bindtap="tabSelect" data-id="{{item.value}}">
           <text class="cuIcon-{{item.icon}}"></text> {{item.label}}
         </view>
