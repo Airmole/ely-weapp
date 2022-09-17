@@ -1,39 +1,39 @@
 <!--components/user-info.wxml-->
 <!-- up主信息区 -->
-<view class="bg-image padding-top-xl flex align-end top-bg" style="background-image: url('{{uperInfo.top_photo}}')">
+<view class="bg-image padding-top-xl flex align-end top-bg" style="background-image: url('{{uperInfo.top_photo||defaultBg}}')">
   <view class="bg-shadeBottom padding-top-xl flex-sub">
     <!-- 头像、昵称。签名 -->
     <view class="flex">
       <view class="basis-xs">
         <!-- 头像 -->
-        <view class="cu-avatar xl round margin-left" style="background-image:url({{uperInfo.face}});">
-          <view wx:if="{{uperInfo.official.type == 0}}" style="top: 100rpx;background-color: transparent;" class="cu-tag badge">
+        <view class="cu-avatar xl round margin-left" style="background-image:url({{uperInfo.face||uperCardInfo.card.face}});">
+          <view wx:if="{{uperInfo.official.type == 0 || uperCardInfo.card.Official.type == 0}}" style="top: 100rpx;background-color: transparent;" class="cu-tag badge">
             <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
           </view>
         </view>
       </view>
       <view class="padding">
         <!-- 徽标 -->
-        <view class="text-lg text-bold nickname">{{uperInfo.name}} <text class="round cuIcon-{{uperInfo.sex=='女'?'female':'male'}} text-sm bg-{{uperInfo.sex=='女'?'pink':'blue'}}"></text><text class="cu-tag radius sm bg-orange margin-left-xs">Lv{{uperInfo.level}}</text>
-          <image wx:if="{{uperInfo.vip.type > 0 && uperInfo.vip.status > 0}}" class="viper margin-left-xs" mode="heightFix" src="{{uperInfo.vip.label.img_label_uri_hans}}"></image>
-          <image wx:if="{{uperInfo.nameplate}}" class="viper margin-left-xs" mode="heightFix" src="{{uperInfo.nameplate.image_small}}"></image>
+        <view class="text-lg text-bold nickname">{{uperInfo.name||uperCardInfo.card.name}} <text class="round cuIcon-{{(uperInfo.sex=='女' || uperCardInfo.card.sex=='女')?'female':'male'}} text-sm bg-{{(uperInfo.sex=='女' || uperCardInfo.card.sex=='女')?'pink':'blue'}}"></text><text class="cu-tag radius sm bg-orange margin-left-xs">Lv{{uperInfo.level||uperCardInfo.card.level_info.current_level}}</text>
+          <image wx:if="{{(uperInfo.vip.type > 0 && uperInfo.vip.status > 0)||(uperCardInfo.card.vip.type > 0 && uperCardInfo.card.vip.status > 0)}}" class="viper margin-left-xs" mode="heightFix" src="{{uperInfo.vip.label.img_label_uri_hans||uperCardInfo.card.vip.label.img_label_uri_hans}}"></image>
+          <image wx:if="{{uperInfo.nameplate||uperCardInfo.card.nameplate}}" class="viper margin-left-xs" mode="heightFix" src="{{uperInfo.nameplate.image_small||uperCardInfo.card.nameplate.image_small}}"></image>
           <view wx:if="{{uperInfo.live_room.roomStatus==1&&uperInfo.live_room.liveStatus==1}}" class="margin-left-xs cu-tag radius sm bg-pink">
             <image class="live-gif" src="https://s1.hdslb.com/bfs/static/jinkela/space/assets/live.gif"></image> 直播中
           </view>
         </view>
         <!-- 签名 -->
-        <view>{{uperInfo.sign}}</view>
+        <view>{{uperInfo.sign || uperCardInfo.card.sign}}</view>
       </view>
     </view>
     <!-- 认证信息 -->
-    <view class="cu-bar" wx:if="{{uperInfo.official.type >= 0}}">
+    <view class="cu-bar" wx:if="{{uperInfo.official.type >= 0 || uperCardInfo.card.Official.type >= 0}}">
       <view class="action">
-        <view wx:if="{{uperInfo.official.type == 0}}" class="margin-lr-xs padding-top-xs">
+        <view wx:if="{{uperInfo.official.type == 0||uperCardInfo.card.Official.type == 0}}" class="margin-lr-xs padding-top-xs">
           <image style="width:32rpx;height:32rpx;border-radius: 100%;" src="https://s1.hdslb.com/bfs/seed/jinkela/short/user-avatar/personal.svg"></image>
         </view>
-        <block wx:if="{{uperInfo.official.role == 1 || uperInfo.official.role ==2 || uperInfo.official.role ==7 || uperInfo.official.role ==9}}">个人认证</block>
+        <block wx:if="{{uperInfo.official.role == 1 || uperInfo.official.role ==2 || uperInfo.official.role ==7 || uperInfo.official.role ==9 || uperCardInfo.card.Official.role == 1 || uperCardInfo.card.Official.role ==2 || uperCardInfo.card.Official.role ==7 || uperCardInfo.card.Official.role ==9}}">个人认证</block>
         <block wx:else="">机构认证</block>
-        <text>：{{ uperInfo.official.title }}</text>
+        <text>：{{ uperInfo.official.title || uperCardInfo.card.Official.title }}</text>
       </view>
     </view>
     <!-- 底部流水 -->

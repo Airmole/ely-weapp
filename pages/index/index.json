@@ -6,6 +6,7 @@
     "video-content": "./components/video-content/video-content",
     "series-list": "./components/series-list/series-list",
     "poster": "/weapp-canvas/poster",
+    "tips": "./components/tips/tips",
     "ec-canvas": "../../echarts/ec-canvas"
   }
 }

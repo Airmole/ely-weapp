@@ -104,7 +104,7 @@
     </navigator>
 
     <!-- 视频投稿 -->
-    <view class="margin-tb margin-lr-sm shadow-warp">
+    <view class="margin-tb margin-lr-sm shadow-warp" wx:if="{{videos.list.vlist}}">
       <view class="cu-bar bg-white solid-bottom radius-top">
         <view class="action text-bold" style="color: #00A1D6;">
           <text class="margin-lr-xs">🎬</text>视频投稿({{videos.page.count}})
@@ -139,7 +139,8 @@
 
   <!-- 投稿 -->
   <block wx:if="{{tabCur == 'video'}}">
-    <video-content id="video-content" videos="{{videos}}" bind:tidChanged="videoTidChanged" bind:orderbyChanged="orderbyChanged"></video-content>
+    <video-content wx:if="{{videos.list.vlist}}" id="video-content" videos="{{videos}}" bind:tidChanged="videoTidChanged" bind:orderbyChanged="orderbyChanged"></video-content>
+    <tips wx:else tipsText="暂时无法加载，稍后再试"></tips>
   </block>
 
   <!-- 合集 -->

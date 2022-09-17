@@ -1,0 +1,7 @@
+<!--pages/index/component/tips.wxml-->
+<view class="remind-box padding-xl flex-wrap justify-center">
+  <view class="text-center">
+    <image wx:if="{{showImage}}" class="remind-img" src="{{image||defaultImg}}" mode="widthFix"></image>
+  </view>
+  <view class="text-center"><text class="remind-text">{{tipsText}}</text></view>
+</view>

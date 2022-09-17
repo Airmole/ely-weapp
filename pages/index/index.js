@@ -72,6 +72,7 @@ Page({
     this.getUperChargeData(uid)
     this.getUperVideoList(uid)
     this.getUperSeriesList(uid)
+    this.getLiveroomTopGuard('22387371', app.globalData.uid)
 
     let date = options.date ? options.date : '';
     if (date == '') {
@@ -94,9 +95,9 @@ Page({
           uperInfo: res.data.data
         })
         // console.log(res.data.data.live_room)
-        if (res.data.data.live_room) {
-          _this.getLiveroomTopGuard(res.data.data.live_room.roomid, app.globalData.uid)
-        }
+        // if (res.data.data.live_room) {
+        //   _this.getLiveroomTopGuard(res.data.data.live_room.roomid, app.globalData.uid)
+        // }
       }
     })
   },
