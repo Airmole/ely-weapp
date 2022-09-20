@@ -5,6 +5,6 @@
   <view slot="content">实时弹幕</view>
 </cu-custom>
 
-<scroll-view id="danmus" scroll-y scroll-into-view="danmu{{danmus.length-1}}" class="padding-lr" style="height: {{windowHeight-120}}px">
-    <view id="danmu{{index}}" class="bg-gray" wx:for="{{danmus}}" wx:key="danmu"><text>{{item.all}}</text></view>
+<scroll-view id="danmus" scroll-y scroll-into-view="danmu{{danmus.length-1}}" class="padding-lr padding-top" style="height: {{windowHeight-120}}px">
+  <view id="danmu{{index}}" class="bg-gray" wx:for="{{danmus}}" wx:key="danmu"><text>{{item.all}}</text></view>
 </scroll-view>

@@ -1,13 +1,13 @@
 const app = getApp()
 var socket = null; //全局定义socket对象
 var timer = null
-import { BrotliDecode } from './decode'
+import { BrotliDecode } from './decode' // 引入谷歌brotli压缩解码
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    roomId: 24697351,
+    roomId: 22387371, // 直播间房间号
     danmus: [],
     windowHeight: 0
   },
@@ -15,15 +15,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
+    // 获取窗口高度
     const windowHeight = app.globalData.windowHeight
     this.setData({ windowHeight: windowHeight })
+    // websocket连接
     this.connect(this.data.roomId)
-  },
-  onReady() {
   },
   //创建websocket
   connect(roomId) {
-    //正式地址使用wss
     socket = wx.connectSocket({
       url: 'wss://broadcastlv.chat.bilibili.com/sub',
       success: res => {
@@ -42,7 +41,7 @@ Page({
         "key": ""    //值为空字符串好像也没问题
       }
       const sendData = getCertification(JSON.stringify(certification))
-      send(sendData)
+      send(sendData) // 发送
       console.log(JSON.stringify(certification))
       //发送心跳包
       timer = setInterval(function () {
@@ -72,16 +71,17 @@ Page({
         }
         return buff;
       }
-      //发送事件
+      // 发送
       function send(data) {
         socket.send({
           data: data,
           success: res => {
-            // console.info('客户端发送', res);
+            console.info('客户端发送', res);
           }
         });
       }
     });
+    // 连接关闭时
     socket.onClose(function () {
       //当客户端收到服务端发送的关闭连接请求时，触发onclose事件
       console.log("close");
@@ -90,10 +90,11 @@ Page({
       }
       wx.redirectTo({ url: './wss' })
     });
+    // 链接错误时
     socket.onError(function () {
       console.info('连接报错');
     });
-    //服务器发送监听
+    // 监听 WebSocket 接受到服务器的消息事件
     socket.onMessage(function (e) {
       var data = e.data;
       // console.info('接收到的数据', data);
@@ -148,6 +149,7 @@ Page({
         }
         // 弹幕事件
         if (cmd == 'DANMU_MSG') {
+          console.log('弹幕信息->', e)
           let uname = e.info[2][1];
           let timedata = new Date(e.info[9].ts * 1000);
           // let time = timedata.toLocaleDateString() + " " + timedata.toTimeString().split(" ")[0];
@@ -232,5 +234,4 @@ Page({
       }
     });
   }
-
 })
