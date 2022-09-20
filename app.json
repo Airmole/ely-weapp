@@ -5,6 +5,7 @@
     "pages/dynamic/detail",
     "pages/series/detail",
     "pages/rank/index",
+    "pages/live/wss",
     "pages/faq/index"
   ],
   "window":{

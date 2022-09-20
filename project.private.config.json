@@ -10,8 +10,8 @@
       "list": [
         {
           "name": "",
-          "pathName": "pages/rank/index",
-          "query": "date=20220821",
+          "pathName": "pages/live/wss",
+          "query": "",
           "launchMode": "default",
           "scene": null
         }
